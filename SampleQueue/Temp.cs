@@ -13,6 +13,7 @@ namespace SampleQueue
     {
         public static string ch = "Data Source=192.168.1.245;Initial Catalog=DtradeProduction;Persist Security Info=True;User ID=prog4;Password=DeS";
         public static string ch2 = "Data Source=192.168.1.245;Initial Catalog=SecurityReport;Persist Security Info=True;User ID=prog4;Password=DeS";
+        public static string erp = "Data Source=192.168.70.115;Initial Catalog=AXDB;Persist Security Info=True;User ID=iplan;Password=Ipla246!";
         public static string path = @"\\192.168.1.248\Shared File\SQData";//VN
         //public static string ch = "Data Source=192.168.50.253;Initial Catalog=DtradeProduction;Persist Security Info=True;User ID=sa;Password=Sql4116!";
         //public static string ch2 = "Data Source=192.168.50.253;Initial Catalog=SecurityReport;Persist Security Info=True;User ID=sa;Password=Sql4116!";

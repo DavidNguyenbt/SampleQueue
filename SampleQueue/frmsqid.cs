@@ -1,5 +1,4 @@
 ﻿using CSDL;
-using DevExpress.XtraPrinting;
 using QRCoder;
 using SampleQueue.Properties;
 using System;

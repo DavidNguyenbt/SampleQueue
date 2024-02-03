@@ -19,6 +19,7 @@ namespace SampleQueue
     public partial class frmitem : Form
     {
         Connect kn;
+        Connect erp;
         BackgroundWorker worker;
         DataSet ds = new DataSet();
         List<int> tb = new List<int>();
@@ -33,6 +34,8 @@ namespace SampleQueue
         bool unlock = false;
         int dem = 0, row = 0;
         List<SizeQty> ls = new List<SizeQty>();
+        public List<string> color = new List<string>();
+        public List<string> size = new List<string>();
         //System.Globalization.CultureInfo culture;
         public frmitem(bool s, bool cp, List<int> cm, Form1 f, bool _tf = false)
         {
@@ -239,6 +242,7 @@ namespace SampleQueue
         private void frmitem_Load(object sender, EventArgs e)
         {
             kn = new Connect(Temp.ch);
+            erp = new Connect(Temp.erp);
 
             timer1.Stop();
 
@@ -1867,7 +1871,7 @@ namespace SampleQueue
             if (bturgent.Text == "Urgent")
             {
                 urgent = 1;
-                bturgent.Enabled = false;
+                bturgent.Text = "Abort Urgent";
                 email = kn.Doc("select * from [DtradeProduction].[dbo].[00SampleType] where SampleType = '" + dept + "'").Tables[0].Rows[0][1].ToString();
 
                 str = "Your sample order will be placed in urgent mode !!!";
@@ -1876,6 +1880,17 @@ namespace SampleQueue
                 fmr.Show();
 
                 updateurgent = "insert into sromstrurgent values ('" + DateTime.Now.ToString("yyyyMMdd") + "','" + txtdocno.Text + "','Not Approved',NULL,NULL,getdate(),'" + email + "',NULL)";
+            }
+            else if (bturgent.Text == "Abort Urgent")
+            {
+                urgent = 0;
+                bturgent.Text = "Urgent";
+                str = "You have already aborted the urgent mode !!!";
+
+                frmthongbao fmr = new frmthongbao(str);
+                fmr.Show();
+
+                updateurgent = "delete sromstrurgent where DocNo = '" + txtdocno.Text + "')";
             }
             else
             {

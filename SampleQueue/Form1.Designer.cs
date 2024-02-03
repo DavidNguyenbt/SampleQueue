@@ -186,8 +186,24 @@ namespace SampleQueue
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.dtgjson = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbstyle2 = new System.Windows.Forms.ComboBox();
+            this.cmbbu2 = new System.Windows.Forms.ComboBox();
+            this.cmbstage2 = new System.Windows.Forms.ComboBox();
+            this.cmbseason2 = new System.Windows.Forms.ComboBox();
+            this.cmbcft2 = new System.Windows.Forms.ComboBox();
+            this.cmbmonth2 = new System.Windows.Forms.ComboBox();
+            this.rdstyle2 = new System.Windows.Forms.RadioButton();
+            this.rdbu2 = new System.Windows.Forms.RadioButton();
+            this.rdstage2 = new System.Windows.Forms.RadioButton();
+            this.rdseason2 = new System.Windows.Forms.RadioButton();
+            this.rddaily2 = new System.Windows.Forms.RadioButton();
+            this.rdmonthly2 = new System.Windows.Forms.RadioButton();
             this.btrftdownload = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rftdate2 = new System.Windows.Forms.DateTimePicker();
+            this.rftdate1 = new System.Windows.Forms.DateTimePicker();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.dtgurgent = new Zuby.ADGV.AdvancedDataGridView();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -229,22 +245,8 @@ namespace SampleQueue
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.rftdate1 = new System.Windows.Forms.DateTimePicker();
-            this.rftdate2 = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.rdmonthly2 = new System.Windows.Forms.RadioButton();
-            this.rddaily2 = new System.Windows.Forms.RadioButton();
-            this.rdseason2 = new System.Windows.Forms.RadioButton();
-            this.rdstage2 = new System.Windows.Forms.RadioButton();
-            this.rdbu2 = new System.Windows.Forms.RadioButton();
-            this.rdstyle2 = new System.Windows.Forms.RadioButton();
-            this.cmbmonth2 = new System.Windows.Forms.ComboBox();
-            this.cmbcft2 = new System.Windows.Forms.ComboBox();
-            this.cmbseason2 = new System.Windows.Forms.ComboBox();
-            this.cmbstage2 = new System.Windows.Forms.ComboBox();
-            this.cmbbu2 = new System.Windows.Forms.ComboBox();
-            this.cmbstyle2 = new System.Windows.Forms.ComboBox();
-            this.dtgjson = new System.Windows.Forms.DataGridView();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.dtgsampleinventory = new Zuby.ADGV.AdvancedDataGridView();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -276,6 +278,7 @@ namespace SampleQueue
             this.tabPage9.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgjson)).BeginInit();
             this.panel3.SuspendLayout();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgurgent)).BeginInit();
@@ -299,7 +302,8 @@ namespace SampleQueue
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleidmaster)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgjson)).BeginInit();
+            this.tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgsampleinventory)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -546,7 +550,7 @@ namespace SampleQueue
             // 
             this.toolStripMenuItem1.Image = global::SampleQueue.Properties.Resources.icons8_color_dropper_48px;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
             this.toolStripMenuItem1.Text = "Status Color";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -554,7 +558,7 @@ namespace SampleQueue
             // 
             this.toolStripMenuItem3.Image = global::SampleQueue.Properties.Resources.icons8_password_48px;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 26);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(190, 22);
             this.toolStripMenuItem3.Text = "Change password";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -562,7 +566,7 @@ namespace SampleQueue
             // 
             this.notification.Image = global::SampleQueue.Properties.Resources.icons8_alert;
             this.notification.Name = "notification";
-            this.notification.Size = new System.Drawing.Size(194, 26);
+            this.notification.Size = new System.Drawing.Size(190, 22);
             this.notification.Text = "Alert Notification : On";
             this.notification.Click += new System.EventHandler(this.notification_Click);
             // 
@@ -570,7 +574,7 @@ namespace SampleQueue
             // 
             this.limitQtyByDayToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_time_limit;
             this.limitQtyByDayToolStripMenuItem.Name = "limitQtyByDayToolStripMenuItem";
-            this.limitQtyByDayToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.limitQtyByDayToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.limitQtyByDayToolStripMenuItem.Text = "Limit SMV by Day";
             this.limitQtyByDayToolStripMenuItem.Click += new System.EventHandler(this.limitQtyByDayToolStripMenuItem_Click);
             // 
@@ -578,20 +582,20 @@ namespace SampleQueue
             // 
             this.logCheckingToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_log_1;
             this.logCheckingToolStripMenuItem.Name = "logCheckingToolStripMenuItem";
-            this.logCheckingToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.logCheckingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.logCheckingToolStripMenuItem.Text = "Log Checking";
             this.logCheckingToolStripMenuItem.Click += new System.EventHandler(this.logCheckingToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(191, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(187, 6);
             // 
             // sMPCapacityToolStripMenuItem
             // 
             this.sMPCapacityToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_report_card;
             this.sMPCapacityToolStripMenuItem.Name = "sMPCapacityToolStripMenuItem";
-            this.sMPCapacityToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.sMPCapacityToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.sMPCapacityToolStripMenuItem.Text = "SMP Capacity";
             this.sMPCapacityToolStripMenuItem.Click += new System.EventHandler(this.sMPCapacityToolStripMenuItem_Click);
             // 
@@ -599,20 +603,20 @@ namespace SampleQueue
             // 
             this.sMPUploadToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.up;
             this.sMPUploadToolStripMenuItem.Name = "sMPUploadToolStripMenuItem";
-            this.sMPUploadToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.sMPUploadToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.sMPUploadToolStripMenuItem.Text = "SMP Upload";
             this.sMPUploadToolStripMenuItem.Click += new System.EventHandler(this.sMPUploadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(191, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
             // 
             // addNewStyleToolStripMenuItem
             // 
             this.addNewStyleToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_add_pie_chart_report;
             this.addNewStyleToolStripMenuItem.Name = "addNewStyleToolStripMenuItem";
-            this.addNewStyleToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.addNewStyleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.addNewStyleToolStripMenuItem.Text = "Add New Style";
             this.addNewStyleToolStripMenuItem.Click += new System.EventHandler(this.addNewStyleToolStripMenuItem_Click);
             // 
@@ -620,20 +624,20 @@ namespace SampleQueue
             // 
             this.getDataFromERPToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_link;
             this.getDataFromERPToolStripMenuItem.Name = "getDataFromERPToolStripMenuItem";
-            this.getDataFromERPToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.getDataFromERPToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.getDataFromERPToolStripMenuItem.Text = "Get Data From ERP";
             this.getDataFromERPToolStripMenuItem.Click += new System.EventHandler(this.getDataFromERPToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(191, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(187, 6);
             // 
             // standardSMVByGmtTypeToolStripMenuItem
             // 
             this.standardSMVByGmtTypeToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_piece_of_lemon_cake;
             this.standardSMVByGmtTypeToolStripMenuItem.Name = "standardSMVByGmtTypeToolStripMenuItem";
-            this.standardSMVByGmtTypeToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.standardSMVByGmtTypeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.standardSMVByGmtTypeToolStripMenuItem.Text = "Standard SMV";
             this.standardSMVByGmtTypeToolStripMenuItem.Click += new System.EventHandler(this.standardSMVByGmtTypeToolStripMenuItem_Click);
             // 
@@ -641,20 +645,20 @@ namespace SampleQueue
             // 
             this.accumToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_protect;
             this.accumToolStripMenuItem.Name = "accumToolStripMenuItem";
-            this.accumToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.accumToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.accumToolStripMenuItem.Text = "Check SMV of Style";
             this.accumToolStripMenuItem.Click += new System.EventHandler(this.accumToolStripMenuItem_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(191, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(187, 6);
             // 
             // scanSampleIDToolStripMenuItem
             // 
             this.scanSampleIDToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_barcode;
             this.scanSampleIDToolStripMenuItem.Name = "scanSampleIDToolStripMenuItem";
-            this.scanSampleIDToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.scanSampleIDToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.scanSampleIDToolStripMenuItem.Text = "Scan Sample ID / RFID";
             this.scanSampleIDToolStripMenuItem.Click += new System.EventHandler(this.scanSampleIDToolStripMenuItem_Click);
             // 
@@ -662,19 +666,19 @@ namespace SampleQueue
             // 
             this.transferSampleToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_transition_both_directions;
             this.transferSampleToolStripMenuItem.Name = "transferSampleToolStripMenuItem";
-            this.transferSampleToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.transferSampleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.transferSampleToolStripMenuItem.Text = "Transfer Sample";
             this.transferSampleToolStripMenuItem.Click += new System.EventHandler(this.transferSampleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(191, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(187, 6);
             // 
             // adjustPrinterSizeToolStripMenuItem
             // 
             this.adjustPrinterSizeToolStripMenuItem.Name = "adjustPrinterSizeToolStripMenuItem";
-            this.adjustPrinterSizeToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.adjustPrinterSizeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.adjustPrinterSizeToolStripMenuItem.Text = "Adjust Printer Size";
             this.adjustPrinterSizeToolStripMenuItem.Click += new System.EventHandler(this.adjustPrinterSizeToolStripMenuItem_Click);
             // 
@@ -695,7 +699,7 @@ namespace SampleQueue
             // 
             this.capacityTipToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.info;
             this.capacityTipToolStripMenuItem.Name = "capacityTipToolStripMenuItem";
-            this.capacityTipToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.capacityTipToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.capacityTipToolStripMenuItem.Text = "Capacity Tip";
             this.capacityTipToolStripMenuItem.Click += new System.EventHandler(this.capacityTipToolStripMenuItem_Click);
             // 
@@ -703,7 +707,7 @@ namespace SampleQueue
             // 
             this.urgentTipToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.info;
             this.urgentTipToolStripMenuItem.Name = "urgentTipToolStripMenuItem";
-            this.urgentTipToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.urgentTipToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.urgentTipToolStripMenuItem.Text = "Urgent Tip";
             this.urgentTipToolStripMenuItem.Click += new System.EventHandler(this.capacityTipToolStripMenuItem_Click);
             // 
@@ -711,20 +715,20 @@ namespace SampleQueue
             // 
             this.commentTipToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.info;
             this.commentTipToolStripMenuItem.Name = "commentTipToolStripMenuItem";
-            this.commentTipToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.commentTipToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.commentTipToolStripMenuItem.Text = "Comment Tip";
             this.commentTipToolStripMenuItem.Click += new System.EventHandler(this.capacityTipToolStripMenuItem_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(148, 6);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(144, 6);
             // 
             // userManualToolStripMenuItem
             // 
             this.userManualToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_User_Manual;
             this.userManualToolStripMenuItem.Name = "userManualToolStripMenuItem";
-            this.userManualToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.userManualToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.userManualToolStripMenuItem.Text = "User Manual";
             this.userManualToolStripMenuItem.Click += new System.EventHandler(this.userManualToolStripMenuItem_Click);
             // 
@@ -806,6 +810,7 @@ namespace SampleQueue
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage12);
+            this.tabControl1.Controls.Add(this.tabPage13);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Location = new System.Drawing.Point(0, 8);
@@ -1711,6 +1716,21 @@ namespace SampleQueue
             this.panel9.Size = new System.Drawing.Size(1607, 550);
             this.panel9.TabIndex = 2;
             // 
+            // dtgjson
+            // 
+            this.dtgjson.AllowUserToAddRows = false;
+            this.dtgjson.AllowUserToDeleteRows = false;
+            this.dtgjson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtgjson.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtgjson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgjson.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgjson.Location = new System.Drawing.Point(0, 0);
+            this.dtgjson.Name = "dtgjson";
+            this.dtgjson.ReadOnly = true;
+            this.dtgjson.RowHeadersWidth = 5;
+            this.dtgjson.Size = new System.Drawing.Size(1607, 550);
+            this.dtgjson.TabIndex = 0;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1737,6 +1757,149 @@ namespace SampleQueue
             this.panel3.Size = new System.Drawing.Size(1607, 41);
             this.panel3.TabIndex = 0;
             // 
+            // cmbstyle2
+            // 
+            this.cmbstyle2.FormattingEnabled = true;
+            this.cmbstyle2.Location = new System.Drawing.Point(775, 10);
+            this.cmbstyle2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbstyle2.Name = "cmbstyle2";
+            this.cmbstyle2.Size = new System.Drawing.Size(178, 21);
+            this.cmbstyle2.TabIndex = 16;
+            // 
+            // cmbbu2
+            // 
+            this.cmbbu2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbbu2.FormattingEnabled = true;
+            this.cmbbu2.Location = new System.Drawing.Point(1209, 11);
+            this.cmbbu2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbbu2.Name = "cmbbu2";
+            this.cmbbu2.Size = new System.Drawing.Size(107, 21);
+            this.cmbbu2.TabIndex = 17;
+            this.cmbbu2.SelectedIndexChanged += new System.EventHandler(this.cmbbu2_SelectedIndexChanged);
+            // 
+            // cmbstage2
+            // 
+            this.cmbstage2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbstage2.FormattingEnabled = true;
+            this.cmbstage2.Location = new System.Drawing.Point(1026, 10);
+            this.cmbstage2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbstage2.Name = "cmbstage2";
+            this.cmbstage2.Size = new System.Drawing.Size(107, 21);
+            this.cmbstage2.TabIndex = 17;
+            // 
+            // cmbseason2
+            // 
+            this.cmbseason2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbseason2.FormattingEnabled = true;
+            this.cmbseason2.Location = new System.Drawing.Point(625, 10);
+            this.cmbseason2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbseason2.Name = "cmbseason2";
+            this.cmbseason2.Size = new System.Drawing.Size(74, 21);
+            this.cmbseason2.TabIndex = 18;
+            this.cmbseason2.SelectedIndexChanged += new System.EventHandler(this.cmbseason2_SelectedIndexChanged);
+            // 
+            // cmbcft2
+            // 
+            this.cmbcft2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbcft2.FormattingEnabled = true;
+            this.cmbcft2.Items.AddRange(new object[] {
+            "ENDLINE",
+            "CFT"});
+            this.cmbcft2.Location = new System.Drawing.Point(247, 11);
+            this.cmbcft2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbcft2.Name = "cmbcft2";
+            this.cmbcft2.Size = new System.Drawing.Size(74, 21);
+            this.cmbcft2.TabIndex = 19;
+            // 
+            // cmbmonth2
+            // 
+            this.cmbmonth2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbmonth2.FormattingEnabled = true;
+            this.cmbmonth2.Items.AddRange(new object[] {
+            "3 months",
+            "6 months",
+            "9 months",
+            "12 months"});
+            this.cmbmonth2.Location = new System.Drawing.Point(463, 10);
+            this.cmbmonth2.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbmonth2.Name = "cmbmonth2";
+            this.cmbmonth2.Size = new System.Drawing.Size(74, 21);
+            this.cmbmonth2.TabIndex = 19;
+            // 
+            // rdstyle2
+            // 
+            this.rdstyle2.AutoSize = true;
+            this.rdstyle2.Location = new System.Drawing.Point(714, 14);
+            this.rdstyle2.Margin = new System.Windows.Forms.Padding(2);
+            this.rdstyle2.Name = "rdstyle2";
+            this.rdstyle2.Size = new System.Drawing.Size(48, 17);
+            this.rdstyle2.TabIndex = 11;
+            this.rdstyle2.Text = "Style";
+            this.rdstyle2.UseVisualStyleBackColor = true;
+            this.rdstyle2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
+            // rdbu2
+            // 
+            this.rdbu2.AutoSize = true;
+            this.rdbu2.Location = new System.Drawing.Point(1165, 14);
+            this.rdbu2.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbu2.Name = "rdbu2";
+            this.rdbu2.Size = new System.Drawing.Size(40, 17);
+            this.rdbu2.TabIndex = 12;
+            this.rdbu2.Text = "BU";
+            this.rdbu2.UseVisualStyleBackColor = true;
+            this.rdbu2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
+            // rdstage2
+            // 
+            this.rdstage2.AutoSize = true;
+            this.rdstage2.Location = new System.Drawing.Point(969, 14);
+            this.rdstage2.Margin = new System.Windows.Forms.Padding(2);
+            this.rdstage2.Name = "rdstage2";
+            this.rdstage2.Size = new System.Drawing.Size(53, 17);
+            this.rdstage2.TabIndex = 12;
+            this.rdstage2.Text = "Stage";
+            this.rdstage2.UseVisualStyleBackColor = true;
+            this.rdstage2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
+            // rdseason2
+            // 
+            this.rdseason2.AutoSize = true;
+            this.rdseason2.Location = new System.Drawing.Point(552, 14);
+            this.rdseason2.Margin = new System.Windows.Forms.Padding(2);
+            this.rdseason2.Name = "rdseason2";
+            this.rdseason2.Size = new System.Drawing.Size(61, 17);
+            this.rdseason2.TabIndex = 13;
+            this.rdseason2.Text = "Season";
+            this.rdseason2.UseVisualStyleBackColor = true;
+            this.rdseason2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
+            // rddaily2
+            // 
+            this.rddaily2.AutoSize = true;
+            this.rddaily2.Checked = true;
+            this.rddaily2.Location = new System.Drawing.Point(339, 14);
+            this.rddaily2.Margin = new System.Windows.Forms.Padding(2);
+            this.rddaily2.Name = "rddaily2";
+            this.rddaily2.Size = new System.Drawing.Size(48, 17);
+            this.rddaily2.TabIndex = 14;
+            this.rddaily2.TabStop = true;
+            this.rddaily2.Text = "Daily";
+            this.rddaily2.UseVisualStyleBackColor = true;
+            this.rddaily2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
+            // rdmonthly2
+            // 
+            this.rdmonthly2.AutoSize = true;
+            this.rdmonthly2.Location = new System.Drawing.Point(389, 14);
+            this.rdmonthly2.Margin = new System.Windows.Forms.Padding(2);
+            this.rdmonthly2.Name = "rdmonthly2";
+            this.rdmonthly2.Size = new System.Drawing.Size(62, 17);
+            this.rdmonthly2.TabIndex = 15;
+            this.rdmonthly2.Text = "Monthly";
+            this.rdmonthly2.UseVisualStyleBackColor = true;
+            this.rdmonthly2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
+            // 
             // btrftdownload
             // 
             this.btrftdownload.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1750,6 +1913,34 @@ namespace SampleQueue
             this.btrftdownload.Text = "DOWNLOAD";
             this.btrftdownload.UseVisualStyleBackColor = true;
             this.btrftdownload.Click += new System.EventHandler(this.btrftdownload_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 18);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Date : ";
+            // 
+            // rftdate2
+            // 
+            this.rftdate2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.rftdate2.Location = new System.Drawing.Point(140, 11);
+            this.rftdate2.Margin = new System.Windows.Forms.Padding(2);
+            this.rftdate2.Name = "rftdate2";
+            this.rftdate2.Size = new System.Drawing.Size(90, 20);
+            this.rftdate2.TabIndex = 0;
+            // 
+            // rftdate1
+            // 
+            this.rftdate1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.rftdate1.Location = new System.Drawing.Point(46, 11);
+            this.rftdate1.Margin = new System.Windows.Forms.Padding(2);
+            this.rftdate1.Name = "rftdate1";
+            this.rftdate1.Size = new System.Drawing.Size(90, 20);
+            this.rftdate1.TabIndex = 0;
             // 
             // tabPage10
             // 
@@ -2343,191 +2534,31 @@ namespace SampleQueue
             this.miniToolStrip.Size = new System.Drawing.Size(1156, 25);
             this.miniToolStrip.TabIndex = 1;
             // 
-            // rftdate1
+            // tabPage13
             // 
-            this.rftdate1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.rftdate1.Location = new System.Drawing.Point(46, 11);
-            this.rftdate1.Margin = new System.Windows.Forms.Padding(2);
-            this.rftdate1.Name = "rftdate1";
-            this.rftdate1.Size = new System.Drawing.Size(90, 20);
-            this.rftdate1.TabIndex = 0;
+            this.tabPage13.Controls.Add(this.dtgsampleinventory);
+            this.tabPage13.Location = new System.Drawing.Point(4, 4);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Size = new System.Drawing.Size(1611, 595);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "Sample Inventory";
+            this.tabPage13.UseVisualStyleBackColor = true;
             // 
-            // rftdate2
+            // dtgsampleinventory
             // 
-            this.rftdate2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.rftdate2.Location = new System.Drawing.Point(140, 11);
-            this.rftdate2.Margin = new System.Windows.Forms.Padding(2);
-            this.rftdate2.Name = "rftdate2";
-            this.rftdate2.Size = new System.Drawing.Size(90, 20);
-            this.rftdate2.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 18);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Date : ";
-            // 
-            // rdmonthly2
-            // 
-            this.rdmonthly2.AutoSize = true;
-            this.rdmonthly2.Location = new System.Drawing.Point(389, 14);
-            this.rdmonthly2.Margin = new System.Windows.Forms.Padding(2);
-            this.rdmonthly2.Name = "rdmonthly2";
-            this.rdmonthly2.Size = new System.Drawing.Size(62, 17);
-            this.rdmonthly2.TabIndex = 15;
-            this.rdmonthly2.Text = "Monthly";
-            this.rdmonthly2.UseVisualStyleBackColor = true;
-            this.rdmonthly2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // rddaily2
-            // 
-            this.rddaily2.AutoSize = true;
-            this.rddaily2.Checked = true;
-            this.rddaily2.Location = new System.Drawing.Point(339, 14);
-            this.rddaily2.Margin = new System.Windows.Forms.Padding(2);
-            this.rddaily2.Name = "rddaily2";
-            this.rddaily2.Size = new System.Drawing.Size(48, 17);
-            this.rddaily2.TabIndex = 14;
-            this.rddaily2.TabStop = true;
-            this.rddaily2.Text = "Daily";
-            this.rddaily2.UseVisualStyleBackColor = true;
-            this.rddaily2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // rdseason2
-            // 
-            this.rdseason2.AutoSize = true;
-            this.rdseason2.Location = new System.Drawing.Point(552, 14);
-            this.rdseason2.Margin = new System.Windows.Forms.Padding(2);
-            this.rdseason2.Name = "rdseason2";
-            this.rdseason2.Size = new System.Drawing.Size(61, 17);
-            this.rdseason2.TabIndex = 13;
-            this.rdseason2.Text = "Season";
-            this.rdseason2.UseVisualStyleBackColor = true;
-            this.rdseason2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // rdstage2
-            // 
-            this.rdstage2.AutoSize = true;
-            this.rdstage2.Location = new System.Drawing.Point(969, 14);
-            this.rdstage2.Margin = new System.Windows.Forms.Padding(2);
-            this.rdstage2.Name = "rdstage2";
-            this.rdstage2.Size = new System.Drawing.Size(53, 17);
-            this.rdstage2.TabIndex = 12;
-            this.rdstage2.Text = "Stage";
-            this.rdstage2.UseVisualStyleBackColor = true;
-            this.rdstage2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // rdbu2
-            // 
-            this.rdbu2.AutoSize = true;
-            this.rdbu2.Location = new System.Drawing.Point(1165, 14);
-            this.rdbu2.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbu2.Name = "rdbu2";
-            this.rdbu2.Size = new System.Drawing.Size(40, 17);
-            this.rdbu2.TabIndex = 12;
-            this.rdbu2.Text = "BU";
-            this.rdbu2.UseVisualStyleBackColor = true;
-            this.rdbu2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // rdstyle2
-            // 
-            this.rdstyle2.AutoSize = true;
-            this.rdstyle2.Location = new System.Drawing.Point(714, 14);
-            this.rdstyle2.Margin = new System.Windows.Forms.Padding(2);
-            this.rdstyle2.Name = "rdstyle2";
-            this.rdstyle2.Size = new System.Drawing.Size(48, 17);
-            this.rdstyle2.TabIndex = 11;
-            this.rdstyle2.Text = "Style";
-            this.rdstyle2.UseVisualStyleBackColor = true;
-            this.rdstyle2.CheckedChanged += new System.EventHandler(this.rddaily2_CheckedChanged);
-            // 
-            // cmbmonth2
-            // 
-            this.cmbmonth2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbmonth2.FormattingEnabled = true;
-            this.cmbmonth2.Items.AddRange(new object[] {
-            "3 months",
-            "6 months",
-            "9 months",
-            "12 months"});
-            this.cmbmonth2.Location = new System.Drawing.Point(463, 10);
-            this.cmbmonth2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbmonth2.Name = "cmbmonth2";
-            this.cmbmonth2.Size = new System.Drawing.Size(74, 21);
-            this.cmbmonth2.TabIndex = 19;
-            // 
-            // cmbcft2
-            // 
-            this.cmbcft2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbcft2.FormattingEnabled = true;
-            this.cmbcft2.Items.AddRange(new object[] {
-            "ENDLINE",
-            "CFT"});
-            this.cmbcft2.Location = new System.Drawing.Point(247, 11);
-            this.cmbcft2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbcft2.Name = "cmbcft2";
-            this.cmbcft2.Size = new System.Drawing.Size(74, 21);
-            this.cmbcft2.TabIndex = 19;
-            // 
-            // cmbseason2
-            // 
-            this.cmbseason2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbseason2.FormattingEnabled = true;
-            this.cmbseason2.Location = new System.Drawing.Point(625, 10);
-            this.cmbseason2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbseason2.Name = "cmbseason2";
-            this.cmbseason2.Size = new System.Drawing.Size(74, 21);
-            this.cmbseason2.TabIndex = 18;
-            this.cmbseason2.SelectedIndexChanged += new System.EventHandler(this.cmbseason2_SelectedIndexChanged);
-            // 
-            // cmbstage2
-            // 
-            this.cmbstage2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbstage2.FormattingEnabled = true;
-            this.cmbstage2.Location = new System.Drawing.Point(1026, 10);
-            this.cmbstage2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbstage2.Name = "cmbstage2";
-            this.cmbstage2.Size = new System.Drawing.Size(107, 21);
-            this.cmbstage2.TabIndex = 17;
-            // 
-            // cmbbu2
-            // 
-            this.cmbbu2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbbu2.FormattingEnabled = true;
-            this.cmbbu2.Location = new System.Drawing.Point(1209, 11);
-            this.cmbbu2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbbu2.Name = "cmbbu2";
-            this.cmbbu2.Size = new System.Drawing.Size(107, 21);
-            this.cmbbu2.TabIndex = 17;
-            this.cmbbu2.SelectedIndexChanged += new System.EventHandler(this.cmbbu2_SelectedIndexChanged);
-            // 
-            // cmbstyle2
-            // 
-            this.cmbstyle2.FormattingEnabled = true;
-            this.cmbstyle2.Location = new System.Drawing.Point(775, 10);
-            this.cmbstyle2.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbstyle2.Name = "cmbstyle2";
-            this.cmbstyle2.Size = new System.Drawing.Size(178, 21);
-            this.cmbstyle2.TabIndex = 16;
-            // 
-            // dtgjson
-            // 
-            this.dtgjson.AllowUserToAddRows = false;
-            this.dtgjson.AllowUserToDeleteRows = false;
-            this.dtgjson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dtgjson.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dtgjson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgjson.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgjson.Location = new System.Drawing.Point(0, 0);
-            this.dtgjson.Name = "dtgjson";
-            this.dtgjson.ReadOnly = true;
-            this.dtgjson.RowHeadersWidth = 5;
-            this.dtgjson.Size = new System.Drawing.Size(1607, 550);
-            this.dtgjson.TabIndex = 0;
+            this.dtgsampleinventory.AllowUserToAddRows = false;
+            this.dtgsampleinventory.AllowUserToDeleteRows = false;
+            this.dtgsampleinventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgsampleinventory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgsampleinventory.FilterAndSortEnabled = true;
+            this.dtgsampleinventory.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dtgsampleinventory.Location = new System.Drawing.Point(0, 0);
+            this.dtgsampleinventory.Name = "dtgsampleinventory";
+            this.dtgsampleinventory.ReadOnly = true;
+            this.dtgsampleinventory.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dtgsampleinventory.Size = new System.Drawing.Size(1611, 595);
+            this.dtgsampleinventory.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dtgsampleinventory.TabIndex = 0;
             // 
             // Form1
             // 
@@ -2589,6 +2620,7 @@ namespace SampleQueue
             this.tabPage9.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgjson)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tabPage10.ResumeLayout(false);
@@ -2617,7 +2649,8 @@ namespace SampleQueue
             this.tabPage12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleidmaster)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgjson)).EndInit();
+            this.tabPage13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgsampleinventory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2791,6 +2824,8 @@ namespace SampleQueue
         private System.Windows.Forms.DateTimePicker rftdate2;
         private System.Windows.Forms.DateTimePicker rftdate1;
         private System.Windows.Forms.DataGridView dtgjson;
+        private System.Windows.Forms.TabPage tabPage13;
+        private Zuby.ADGV.AdvancedDataGridView dtgsampleinventory;
     }
 }
 

@@ -15,8 +15,6 @@ using QRCoder;
 using Point = System.Drawing.Point;
 using CSDL;
 using FontStyle = System.Drawing.FontStyle;
-using DevExpress.Printing;
-using DevExpress.Utils.ScrollAnnotations;
 
 namespace SampleQueue
 {
