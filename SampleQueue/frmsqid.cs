@@ -349,6 +349,15 @@ namespace SampleQueue
             catch { }
         }
 
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            string query = " EXEC [dbs].[usp_sromstrsampleid_UpdateData]";
+            kn.Ghi(query);
+
+            MessageBox.Show("The data was finished the comparison, pls open the list again !!!");
+            Close();
+        }
+
         private void removeRFIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string spid = dataGridView1.Rows[row].Cells["SampleID"].Value.ToString();
@@ -367,6 +376,7 @@ namespace SampleQueue
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
             bool r = true;
+
             foreach (DataRow dr in dt.Rows)
             {
                 if (dr["Status"].ToString() != "")

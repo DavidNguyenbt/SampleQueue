@@ -17,7 +17,7 @@ namespace SampleQueue
     public partial class frmscan : Form
     {
         Form1 frm;
-        Connect kn;
+        Connect kn = new Connect(Temp.ch);
         public frmscan(Form1 frm)
         {
             InitializeComponent();

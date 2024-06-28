@@ -16,8 +16,9 @@ namespace SampleQueue
     {
         Connect kn;
         frmitem frm;
-        List<string> color = new List<string>();
-        List<string> size = new List<string>();
+        BackgroundWorker bgWorker;
+        string style = "";
+        DataTable Data = new DataTable();
         public frmfindstyle(frmitem f)
         {
             InitializeComponent();
@@ -25,6 +26,20 @@ namespace SampleQueue
             kn = new Connect(Temp.erp);
 
             frm = f;
+
+            bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += delegate
+            {
+                Data = kn.Doc("SELECT * FROM [AXDB].[dbo].[AllFGItem] WITH(NOLOCK) WHERE style = '" + style + "'", 3000).Tables[0];
+            };
+            bgWorker.RunWorkerCompleted += delegate
+            {
+                dtgdata.DataSource = Data;
+
+                process.Visible = false;
+
+                txtrows.Text = "Rows : " + Data.Rows.Count;
+            };
         }
         private void LoadData()
         {
@@ -32,16 +47,14 @@ namespace SampleQueue
             {
                 if (txtstyle.Text != "")
                 {
-                    DataTable dt = kn.Doc("SELECT * FROM [AXDB].[dbo].[AllFGItem] WHERE style LIKE '%" + txtstyle.Text.ToUpper() + "%'").Tables[0];
+                    style = txtstyle.Text.ToUpper();
 
-                    dtgdata.DataSource = dt;
+                    process.Visible = true;
 
-                    color = dt.Select().Select(x => x["color"].ToString()).ToList();
-                    size = dt.Select().Select(x => x["sizx"].ToString()).ToList();
+                    bgWorker.RunWorkerAsync();
                 }
             }
             catch { }
-            //fdklasgfjkhejwkfhgw
         }
         private void RunData()
         {
@@ -52,22 +65,48 @@ namespace SampleQueue
                 if (dtgdata.SelectedRows.Count > 0) row = dtgdata.SelectedRows[0];
                 else row = dtgdata.Rows[0];
 
-                frm.color = color;
-                frm.size = size;
-
                 DataTable dt = new DataTable();
                 dt.Columns.Add("smptype", typeof(string));
-                dt.Columns.Add("smptype", typeof(string));
-                dt.Columns.Add("smptype", typeof(string));
-                dt.Columns.Add("smptype", typeof(string));
-                dt.Columns.Add("smptype", typeof(string));
-                dt.Columns.Add("smptype", typeof(string));
+                dt.Columns.Add("unit", typeof(string));
+                dt.Columns.Add("division", typeof(string));
+                dt.Columns.Add("customer", typeof(string));
+                dt.Columns.Add("programcode", typeof(string));
+                dt.Columns.Add("gmttype", typeof(string));
+                dt.Columns.Add("versioncount", typeof(decimal));
+                dt.Columns.Add("smorderno", typeof(string));
+                dt.Columns.Add("style", typeof(string));
+                dt.Columns.Add("custstyle", typeof(string));
+                dt.Columns.Add("fulldesc", typeof(string));
+                dt.Columns.Add("season", typeof(string));
+
+                DataRow dr = dt.NewRow();
+                dr[0] = row.Cells[5].Value.ToString();
+                dr[1] = row.Cells[6].Value.ToString();
+                dr[2] = "";
+                dr[3] = row.Cells[3].Value.ToString();
+                dr[4] = "";
+                dr[5] = row.Cells[8].Value.ToString();
+                dr[6] = 1;
+                dr[7] = row.Cells[0].Value.ToString();
+                dr[8] = row.Cells[1].Value.ToString();
+                dr[9] = row.Cells[1].Value.ToString();
+                dr[10] = row.Cells[7].Value.ToString();
+                dr[11] = row.Cells[2].Value.ToString();
+
+                dt.Rows.Add(dr);
+                dt.AcceptChanges();
+
+                frm.ColorSize = Data;
+                frm.FillData(dr);
+
+                Hide();
             }
             catch { }
         }
         private void frmfindstyle_Load(object sender, EventArgs e)
         {
-
+            txtstyle.Focus();
+            process.Visible = false;
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,8 +121,17 @@ namespace SampleQueue
 
         private void oKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            RunData();
         }
 
+        private void dtgdata_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RunData();
+        }
+
+        private void txtstyle_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) LoadData();
+        }
     }
 }

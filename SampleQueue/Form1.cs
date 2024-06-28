@@ -28,6 +28,7 @@ using OfficeOpenXml;
 
 namespace SampleQueue
 {
+
     public partial class Form1 : Form
     {
         Connect kn;
@@ -40,6 +41,8 @@ namespace SampleQueue
         DataSet dfds = new DataSet();
         frmprinter prt;
         DataSet dshchart = new DataSet();
+        List<Comment> deplay = new List<Comment>();
+        List<Comment> comments = new List<Comment>();
 
         [DllImport("urlmon.dll", CharSet = CharSet.Ansi)]
         private static extern int UrlMkSetSessionOption(int dwOption, string pBuffer, int dwBufferLength, int dwReserved);
@@ -135,6 +138,8 @@ namespace SampleQueue
 
             cmbcft1.SelectedIndex = 0;
             cmbcft2.SelectedIndex = 0;
+
+            lbmess.Visible = false;
         }
 
         private void LoadData()
@@ -143,7 +148,10 @@ namespace SampleQueue
             {
                 if (ds.Tables.Count > 0) ds.Clear();
 
-                if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS"; else ads = "PUMA";
+                if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS";
+                else if (Temp.DeptDesc.ToUpper().Contains("PUMA")) ads = "PUMA";
+                else if (Temp.DeptDesc.ToUpper().Contains("NB")) ads = "NB";
+                else if (Temp.DeptDesc.ToUpper().Contains("PW")) ads = "PW";
 
                 ds = kn.Doc("exec SampleQueueLoading 3,'" + Temp.User + "','" + ads + "','' \n" +
                             "exec SampleQueueLoading 20, '" + ads + "', '', ''");
@@ -288,7 +296,8 @@ namespace SampleQueue
         {
             cmt.Clear();
             frmitem frm = new frmitem(false, false, cmt, this);
-            frm.DataRow = ds.Tables[6].Rows[0];
+            if (ds.Tables[6].Rows.Count > 0) frm.DataRow = ds.Tables[6].Rows[0];
+            else frm.DataRow = ds.Tables[6].NewRow();
 
             frm.ShowDialog();
         }
@@ -695,6 +704,7 @@ namespace SampleQueue
                             cmbvalue.Items.AddRange(dv.ToTable().Select().Select(r => r[cmbcolumn.Text].ToString()).Distinct().ToArray());
                         }
                     }
+                    repaint = 0;
                 }
             }
             catch { }
@@ -784,7 +794,7 @@ namespace SampleQueue
                             TimeSpan tp = trim - DateTime.Now;
 
                             if (tp.TotalDays < delaytime)
-                                CallShowDelay(r["DocNo"].ToString(), "Trimcard near or late with the planning date !!!", "Trimcard Delay");
+                                deplay.Add(new Comment(r["DocNo"].ToString(), "Trimcard near or late with the planning date !!!", "Trimcard Delay"));
                         }
 
                         if (r["FabricActual"].ToString() == "")
@@ -792,7 +802,7 @@ namespace SampleQueue
                             TimeSpan tp = fab - DateTime.Now;
 
                             if (tp.TotalDays < delaytime)
-                                CallShowDelay(r["DocNo"].ToString(), "Fabric near or late with the planning date !!!", "Fabric Delay");
+                                deplay.Add(new Comment(r["DocNo"].ToString(), "Fabric near or late with the planning date !!!", "Fabric Delay"));
                         }
 
                         if (r["DecorationActual"].ToString() == "")
@@ -800,7 +810,7 @@ namespace SampleQueue
                             TimeSpan tp = acc - DateTime.Now;
 
                             if (tp.TotalDays < delaytime)
-                                CallShowDelay(r["DocNo"].ToString(), "Accessory near or late with the planning date !!!", "Accessory Delay");
+                                deplay.Add(new Comment(r["DocNo"].ToString(), "Accessory near or late with the planning date !!!", "Accessory Delay"));
                         }
                     }
 
@@ -809,7 +819,7 @@ namespace SampleQueue
             }
             catch { }
         }
-        private void CallShowDelay(string docno, string ms, string content)
+        private void CallShowCmt(string docno, string ms, string content)
         {
             frmalert frm = new frmalert(this, docno);
             frm.ShowAlert(ms, content);
@@ -989,8 +999,7 @@ namespace SampleQueue
                 {
                     kn.Ghi("delete from sromstrdel where DocNo = '" + DocNo + "'" +
                             "insert into sromstrdel select * from sromstr where DocNo = '" + DocNo + "' \n" +
-                            "delete from sromstr where DocNo = '" + DocNo + "' \n" +
-                            "delete from sroasm where DocNo = '" + DocNo + "'");
+                            "delete from sromstr where DocNo = '" + DocNo + "'");
 
                     if (kn.ErrorMessage == "") worker.RunWorkerAsync();
                     else MessageBox.Show(kn.ErrorMessage);
@@ -1028,6 +1037,16 @@ namespace SampleQueue
 
                 prt.Show();
             }
+
+            if (comments.Count > 0)
+            {
+                lbmess.Text = "You have " + comments.Count + " messages !!!";
+                lbmess.Visible = true;
+            }
+            else { lbmess.Visible = false; }
+
+            if (lbmess.BackColor == Color.White) lbmess.BackColor = Color.Red;
+            else lbmess.BackColor = Color.White;
         }
 
         private void openAppToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1212,6 +1231,8 @@ namespace SampleQueue
                 }
                 catch { }
             }
+
+            ShowRowsCount();
         }
         private void dataGridView6_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -1618,7 +1639,7 @@ namespace SampleQueue
             //    }
             //}
 
-            frmsmpupload frm = new frmsmpupload(files[0]);
+            frmupload frm = new frmupload(files[0]);
             frm.ShowDialog();
         }
 
@@ -1632,7 +1653,7 @@ namespace SampleQueue
             if (op.ShowDialog() == DialogResult.OK)
             {
                 //MessageBox.Show(op.FileName);
-                frmsmpupload frm = new frmsmpupload(op.FileName);
+                frmupload frm = new frmupload(op.FileName);
                 frm.ShowDialog();
             }
         }
@@ -1740,12 +1761,15 @@ namespace SampleQueue
             {
                 string docno = dtgsampleidmaster.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-                DataRow r = ds.Tables[6].Select("DocNo = '" + docno + "'")[0];
+                if (ds.Tables[6].Select("DocNo = '" + docno + "'").Count() > 0)
+                {
+                    DataRow r = ds.Tables[6].Select("DocNo = '" + docno + "'")[0];
 
-                DataTable dt = kn.Doc("select * from sromstrsampleid where DocNo = '" + docno + "' order by RecNo").Tables[0];
+                    DataTable dt = kn.Doc("select * from sromstrsampleid where DocNo = '" + docno + "' order by RecNo").Tables[0];
 
-                frmsqid frm = new frmsqid(dt, r["Style"].ToString(), r["Season"].ToString(), r["Qty"].ToString(), r["SmpType"].ToString(), r["Status"].ToString());
-                frm.ShowDialog();
+                    frmsqid frm = new frmsqid(dt, r["Style"].ToString(), r["Season"].ToString(), r["Qty"].ToString(), r["SmpType"].ToString(), r["Status"].ToString());
+                    frm.ShowDialog();
+                }
             }
         }
 
@@ -1897,7 +1921,8 @@ namespace SampleQueue
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (AppConfig.Notification) LoadComment();
+            //if (AppConfig.Notification) 
+            LoadComment();
         }
 
         private void btchart_Click(object sender, EventArgs e)
@@ -1911,10 +1936,51 @@ namespace SampleQueue
             frm.ShowDialog();
         }
 
+        private void lbmess_Click(object sender, EventArgs e)
+        {
+            foreach (var item in comments.Concat(deplay)) CallShowCmt(item.Dn, item.Message, item.Content);
+
+            deplay.Clear();
+            comments.Clear();
+            lbmess.Visible = false;
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Control && e.KeyCode == Keys.Q)
+            {
+                MessageBox.Show("Q");
+                Application.Exit();
+            }
+        }
+
+        private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmadduser frm = new frmadduser();
+            frm.ShowDialog();
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            ShowRowsCount();
+        }
+
+        private void dtgsampleidmaster_Paint(object sender, PaintEventArgs e)
+        {
+            ShowRowsCount();
+        }
+
         private void LoadComment()
         {
             try
             {
+                comments.Clear();
                 DataTable comm = kn.Doc("exec SmartLineLoadData 4,'" + ads + "','" + Temp.User + "'", 60).Tables[0];
 
                 foreach (DataRow r in comm.Rows)
@@ -1923,11 +1989,7 @@ namespace SampleQueue
                     {
                         if (r["Partner"].ToString() == "All" || r["Partner"].ToString().Contains(Temp.Dept))
                         {
-                            if (Exit(r["DocNo"].ToString()))
-                            {
-                                frmalert frm = new frmalert(this, r["DocNo"].ToString());
-                                frm.ShowAlert(r["CmtOwner"].ToString() + "/" + r["DeptCode"].ToString() + " - " + r["DocNo"].ToString(), r["CmtContent"].ToString());
-                            }
+                            if (Exit(r["DocNo"].ToString())) comments.Add(new Comment(r["DocNo"].ToString(), r["CmtOwner"].ToString() + "/" + r["DeptCode"].ToString() + " - " + r["DocNo"].ToString(), r["CmtContent"].ToString()));
                         }
                     }
                 }
@@ -2036,6 +2098,19 @@ namespace SampleQueue
             }
 
             return mode;
+        }
+    }
+
+    class Comment
+    {
+        public string Dn { get; set; }
+        public string Message { get; set; }
+        public string Content { get; set; }
+        public Comment(string dn, string ms, string ct)
+        {
+            Dn = dn;
+            Message = ms;
+            Content = ct;
         }
     }
 }

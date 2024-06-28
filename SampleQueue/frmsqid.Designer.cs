@@ -35,6 +35,7 @@
             this.lbprint = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbaddprinter = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,8 @@
             this.lbselect,
             this.lbprint,
             this.lbaddprinter,
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 638);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1246, 24);
@@ -69,7 +71,7 @@
             // 
             this.lbrows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lbrows.Name = "lbrows";
-            this.lbrows.Size = new System.Drawing.Size(44, 19);
+            this.lbrows.Size = new System.Drawing.Size(44, 17);
             this.lbrows.Text = "Rows : ";
             // 
             // lbselect
@@ -98,7 +100,7 @@
             this.lbaddprinter.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
             this.lbaddprinter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lbaddprinter.Name = "lbaddprinter";
-            this.lbaddprinter.Size = new System.Drawing.Size(117, 19);
+            this.lbaddprinter.Size = new System.Drawing.Size(117, 17);
             this.lbaddprinter.Text = "ADD INTO PRINTER";
             this.lbaddprinter.Visible = false;
             this.lbaddprinter.Click += new System.EventHandler(this.lbaddprinter_Click);
@@ -109,9 +111,19 @@
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Green;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
             this.toolStripStatusLabel1.Text = "RESET DATA";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Yellow;
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel2.Text = "COMPARISON DATA";
+            this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
             // 
             // dataGridView1
             // 
@@ -252,5 +264,6 @@
         private System.Windows.Forms.ToolStripMenuItem removeRFIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setLocationIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }

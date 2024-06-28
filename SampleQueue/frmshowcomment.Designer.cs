@@ -64,10 +64,10 @@ namespace SampleQueue
             this.btdeletecmt = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtgcomment = new System.Windows.Forms.DataGridView();
-            this.txtcomment = new System.Windows.Forms.TextBox();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtcomment = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgcomment)).BeginInit();
@@ -129,7 +129,7 @@ namespace SampleQueue
             this.history.Location = new System.Drawing.Point(389, 303);
             this.history.Margin = new System.Windows.Forms.Padding(2);
             this.history.Name = "history";
-            this.history.Size = new System.Drawing.Size(724, 243);
+            this.history.Size = new System.Drawing.Size(587, 134);
             this.history.TabIndex = 2;
             this.history.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.history_AfterSelect);
             this.history.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.history_NodeMouseClick);
@@ -172,10 +172,10 @@ namespace SampleQueue
             this.columnHeader1,
             this.columnHeader2});
             this.lstdocument.HideSelection = false;
-            this.lstdocument.Location = new System.Drawing.Point(18, 687);
+            this.lstdocument.Location = new System.Drawing.Point(18, 609);
             this.lstdocument.Margin = new System.Windows.Forms.Padding(2);
             this.lstdocument.Name = "lstdocument";
-            this.lstdocument.Size = new System.Drawing.Size(1094, 110);
+            this.lstdocument.Size = new System.Drawing.Size(958, 110);
             this.lstdocument.TabIndex = 3;
             this.lstdocument.UseCompatibleStateImageBehavior = false;
             this.lstdocument.View = System.Windows.Forms.View.Details;
@@ -209,7 +209,7 @@ namespace SampleQueue
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(17, 672);
+            this.label6.Location = new System.Drawing.Point(14, 585);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(76, 13);
@@ -237,7 +237,7 @@ namespace SampleQueue
             this.lstread.Location = new System.Drawing.Point(17, 439);
             this.lstread.Margin = new System.Windows.Forms.Padding(2);
             this.lstread.Name = "lstread";
-            this.lstread.Size = new System.Drawing.Size(350, 228);
+            this.lstread.Size = new System.Drawing.Size(350, 144);
             this.lstread.TabIndex = 3;
             this.lstread.UseCompatibleStateImageBehavior = false;
             this.lstread.View = System.Windows.Forms.View.Details;
@@ -254,12 +254,12 @@ namespace SampleQueue
             // 
             // txtreplycontent
             // 
-            this.txtreplycontent.Location = new System.Drawing.Point(388, 629);
+            this.txtreplycontent.Location = new System.Drawing.Point(388, 545);
             this.txtreplycontent.Margin = new System.Windows.Forms.Padding(2);
             this.txtreplycontent.Multiline = true;
             this.txtreplycontent.Name = "txtreplycontent";
             this.txtreplycontent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtreplycontent.Size = new System.Drawing.Size(626, 38);
+            this.txtreplycontent.Size = new System.Drawing.Size(493, 38);
             this.txtreplycontent.TabIndex = 1;
             // 
             // btsubmit
@@ -267,10 +267,10 @@ namespace SampleQueue
             this.btsubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btsubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btsubmit.ForeColor = System.Drawing.Color.Blue;
-            this.btsubmit.Location = new System.Drawing.Point(1018, 629);
+            this.btsubmit.Location = new System.Drawing.Point(885, 545);
             this.btsubmit.Margin = new System.Windows.Forms.Padding(2);
             this.btsubmit.Name = "btsubmit";
-            this.btsubmit.Size = new System.Drawing.Size(94, 37);
+            this.btsubmit.Size = new System.Drawing.Size(91, 37);
             this.btsubmit.TabIndex = 5;
             this.btsubmit.Text = "SUBMIT";
             this.btsubmit.UseVisualStyleBackColor = false;
@@ -360,13 +360,13 @@ namespace SampleQueue
             // 
             this.txtreply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtreply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.txtreply.Location = new System.Drawing.Point(388, 573);
+            this.txtreply.Location = new System.Drawing.Point(388, 489);
             this.txtreply.Margin = new System.Windows.Forms.Padding(2);
             this.txtreply.Multiline = true;
             this.txtreply.Name = "txtreply";
             this.txtreply.ReadOnly = true;
             this.txtreply.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtreply.Size = new System.Drawing.Size(724, 28);
+            this.txtreply.Size = new System.Drawing.Size(588, 28);
             this.txtreply.TabIndex = 1;
             // 
             // label10
@@ -374,7 +374,7 @@ namespace SampleQueue
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(386, 557);
+            this.label10.Location = new System.Drawing.Point(386, 473);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(63, 13);
@@ -386,7 +386,7 @@ namespace SampleQueue
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(386, 612);
+            this.label11.Location = new System.Drawing.Point(386, 528);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(99, 13);
@@ -414,7 +414,7 @@ namespace SampleQueue
             this.panel1.Controls.Add(this.txtcomment);
             this.panel1.Location = new System.Drawing.Point(13, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1098, 249);
+            this.panel1.Size = new System.Drawing.Size(963, 249);
             this.panel1.TabIndex = 11;
             // 
             // dtgcomment
@@ -441,18 +441,8 @@ namespace SampleQueue
             this.dtgcomment.Name = "dtgcomment";
             this.dtgcomment.ReadOnly = true;
             this.dtgcomment.RowHeadersWidth = 5;
-            this.dtgcomment.Size = new System.Drawing.Size(1098, 249);
+            this.dtgcomment.Size = new System.Drawing.Size(963, 249);
             this.dtgcomment.TabIndex = 1;
-            // 
-            // txtcomment
-            // 
-            this.txtcomment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtcomment.Location = new System.Drawing.Point(0, 0);
-            this.txtcomment.Multiline = true;
-            this.txtcomment.Name = "txtcomment";
-            this.txtcomment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtcomment.Size = new System.Drawing.Size(1098, 249);
-            this.txtcomment.TabIndex = 0;
             // 
             // Column1
             // 
@@ -478,13 +468,24 @@ namespace SampleQueue
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
+            // txtcomment
+            // 
+            this.txtcomment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtcomment.Location = new System.Drawing.Point(0, 0);
+            this.txtcomment.Multiline = true;
+            this.txtcomment.Name = "txtcomment";
+            this.txtcomment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtcomment.Size = new System.Drawing.Size(963, 249);
+            this.txtcomment.TabIndex = 0;
+            // 
             // frmshowcomment
             // 
             this.AcceptButton = this.btsubmit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1122, 804);
+            this.ClientSize = new System.Drawing.Size(981, 728);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btdeletecmt);
             this.Controls.Add(this.chkresolve);

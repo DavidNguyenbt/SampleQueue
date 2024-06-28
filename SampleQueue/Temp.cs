@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,8 +18,9 @@ namespace SampleQueue
         public static string path = @"\\192.168.1.248\Shared File\SQData";//VN
         //public static string ch = "Data Source=192.168.50.253;Initial Catalog=DtradeProduction;Persist Security Info=True;User ID=sa;Password=Sql4116!";
         //public static string ch2 = "Data Source=192.168.50.253;Initial Catalog=SecurityReport;Persist Security Info=True;User ID=sa;Password=Sql4116!";
+        //public static string erp = "Data Source=192.168.43.20;Initial Catalog=AXDB;Persist Security Info=True;User ID=iplan;Password=mQ$IvJ9YATCJ";
         //public static string path = @"\\192.168.50.253\Software From A1A\Shared File\SQData";//THAI
-        public static string User = "", Dept = "", DeptDesc = "MERA", Profile = "", version = "V1.0.2";
+        public static string User = "KHANH-MERA", Dept = "", DeptDesc = "MERA", Profile = "", version = "V1.2.0";
         public static List<string> BoPhan = new List<string> { "All", "MER - Merchandiser", "SMP - Sample Room", "PTT - Pattern", "MK - Marker", "CUT - Cutting", "EMB - Decoration", "SEW - Sewing", "QC - QC", "CFT - CFT" };
         public static string url = "http://192.168.1.100/", myconfig = "";
         public static Color New = Color.LightBlue;
@@ -70,6 +72,13 @@ namespace SampleQueue
                 wr.Write(config);
                 wr.Close();
             }
+        }
+
+        public static bool IsValidPassword(string password)
+        {
+            // Regex kiểm tra mật khẩu
+            string pattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$";
+            return Regex.IsMatch(password, pattern);
         }
     }
     class PrintingItem

@@ -244,6 +244,12 @@
     <Compile Include="frmaddnewstyle.Designer.cs">
       <DependentUpon>frmaddnewstyle.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmadduser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmadduser.Designer.cs">
+      <DependentUpon>frmadduser.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmadjustprinter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +291,12 @@
     </Compile>
     <Compile Include="frmchecklog.Designer.cs">
       <DependentUpon>frmchecklog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmdeletedsample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmdeletedsample.Designer.cs">
+      <DependentUpon>frmdeletedsample.cs</DependentUpon>
     </Compile>
     <Compile Include="frmdetailsbyday.cs">
       <SubType>Form</SubType>
@@ -400,6 +412,12 @@
     <Compile Include="frmsqid.Designer.cs">
       <DependentUpon>frmsqid.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmtemp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmtemp.Designer.cs">
+      <DependentUpon>frmtemp.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmtest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -411,6 +429,12 @@
     </Compile>
     <Compile Include="frmthongbao.Designer.cs">
       <DependentUpon>frmthongbao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmupload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmupload.Designer.cs">
+      <DependentUpon>frmupload.cs</DependentUpon>
     </Compile>
     <Compile Include="frmurgentapproval.cs">
       <SubType>Form</SubType>
@@ -442,6 +466,9 @@
     <EmbeddedResource Include="frmaddnewstyle.resx">
       <DependentUpon>frmaddnewstyle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmadduser.resx">
+      <DependentUpon>frmadduser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmadjustprinter.resx">
       <DependentUpon>frmadjustprinter.cs</DependentUpon>
     </EmbeddedResource>
@@ -462,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmchecklog.resx">
       <DependentUpon>frmchecklog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmdeletedsample.resx">
+      <DependentUpon>frmdeletedsample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmdetailsbyday.resx">
       <DependentUpon>frmdetailsbyday.cs</DependentUpon>
@@ -520,11 +550,17 @@
     <EmbeddedResource Include="frmsqid.resx">
       <DependentUpon>frmsqid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmtemp.resx">
+      <DependentUpon>frmtemp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmtest.resx">
       <DependentUpon>frmtest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmthongbao.resx">
       <DependentUpon>frmthongbao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmupload.resx">
+      <DependentUpon>frmupload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmurgentapproval.resx">
       <DependentUpon>frmurgentapproval.cs</DependentUpon>

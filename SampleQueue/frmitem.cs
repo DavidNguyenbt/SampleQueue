@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SampleQueue
 {
@@ -26,16 +27,15 @@ namespace SampleQueue
         bool show = false, copy = false, isopen = true, tf = false;
         Form1 fr1;
         string ads = "", versioncount = "", dept = "", bookedqty = "0", email = "", updateurgent = "";
-        public DataRow DataRow { get; set; }
-        int ss = 0, capacity = 0, qty = 0, capacityid = 0, urgent = 0;//urgent 0: normal, 1: not approved, 2: approved
+        public DataRow DataRow { get; set; } = null;
+        int ss = 0, capacity = 0, qty = 0, capacityid = 0, urgent = 0, runbg = 0;//urgent 0: normal, 1: not approved, 2: approved
         decimal smv = 0;
         Graphics grp;
         DateTimePicker dtk = new DateTimePicker();
         bool unlock = false;
         int dem = 0, row = 0;
         List<SizeQty> ls = new List<SizeQty>();
-        public List<string> color = new List<string>();
-        public List<string> size = new List<string>();
+        public DataTable ColorSize { get; set; } = null;
         //System.Globalization.CultureInfo culture;
         public frmitem(bool s, bool cp, List<int> cm, Form1 f, bool _tf = false)
         {
@@ -60,7 +60,9 @@ namespace SampleQueue
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadItem();
+            if (runbg == 0) LoadItem();
+            else LoadSize(style.Text, txtdocno.Text, true);
+
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -68,6 +70,7 @@ namespace SampleQueue
             //throw new NotImplementedException();
             //fr1.StopWorking();
             progressBar1.Visible = false;
+            runbg = 0;
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -171,6 +174,8 @@ namespace SampleQueue
                     decimal bk = qty * smv;
 
                     if (bk > capacity || (bk + bl) > capacity) rs = true;
+
+                    if (capacity == 0) rs = false;
                 }
             }
             catch { }
@@ -249,6 +254,9 @@ namespace SampleQueue
             string sm = tf ? "TF" : "SM";
 
             if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) { ads = sm + "AD"; dept = "ADS"; }
+            else if (Temp.DeptDesc.ToUpper().Contains("PUMA")) { ads = sm + "AA"; dept = "PUMA"; }
+            else if (Temp.DeptDesc.ToUpper().Contains("NB")) { ads = sm + "NB"; dept = "NB"; }
+            else if (Temp.DeptDesc.ToUpper().Contains("PW")) { ads = sm + "PW"; dept = "PW"; }
             else { ads = sm + "AA"; dept = "PUMA"; }
 
 
@@ -257,40 +265,45 @@ namespace SampleQueue
             txtpass.Hide();
             btapply.Hide();
 
-            DataTable open = kn.Doc("select * from sromstr where DocNo = '" + DataRow[0].ToString() + "'").Tables[0];
-
-            if (open.Rows.Count > 0)
+            if (DataRow != null)
             {
-                DateTime date1 = DateTime.Parse(open.Rows[0]["SysLMDate"].ToString());
-                DateTime date2 = DateTime.Parse(DataRow["SysLMDate"].ToString());
+                DataTable open = kn.Doc("select * from sromstr WITH(NOLOCK) where DocNo = '" + DataRow[0].ToString() + "'").Tables[0];
 
-                if (date1 == date2)
+                if (open.Rows.Count > 0)
                 {
-                    kn.Ghi("update sromstr set IsOpen = '" + Temp.User + " " + DateTime.Now.ToString("dd/MM/yy HH:mm:ss") + "' where DocNo = '" + DataRow[0].ToString() + "'");
-                    isopen = true;
-                    timer1.Start();
+                    DateTime date1 = DateTime.Parse(open.Rows[0]["SysLMDate"].ToString());
+                    DateTime date2 = DateTime.Parse(DataRow["SysLMDate"].ToString());
 
-                    worker.RunWorkerAsync();
-                }
-                else
-                {
-                    if (MessageBox.Show("This sample is opening in another place !!! [" + open.Rows[0]["IsOpen"].ToString() + "], do you wanna continue with READ ONLY mode ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (date1 == date2)
                     {
-                        isopen = false;
-                        btsave.Enabled = false;
+                        kn.Ghi("update sromstr set IsOpen = '" + Temp.User + " " + DateTime.Now.ToString("dd/MM/yy HH:mm:ss") + "' where DocNo = '" + DataRow[0].ToString() + "'");
+                        isopen = true;
+                        timer1.Start();
+
                         worker.RunWorkerAsync();
-                        lbstatus.Text = "READ ONLY MODE";
                     }
                     else
                     {
-                        MessageBox.Show("Your data is obsolete, it needs to refesh the data first !!!");
-                        isopen = false;
-                        Close();
+                        if (MessageBox.Show("This sample is opening in another place !!! [" + open.Rows[0]["IsOpen"].ToString() + "], do you wan to continue with READ ONLY mode ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            isopen = false;
+                            btsave.Enabled = false;
+                            worker.RunWorkerAsync();
+                            lbstatus.Text = "READ ONLY MODE";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Your data is obsolete, it needs to refesh the data first !!!");
+                            isopen = false;
+                            Close();
 
-                        fr1.worker.RunWorkerAsync();
+                            fr1.worker.RunWorkerAsync();
+                        }
                     }
                 }
+                else worker.RunWorkerAsync();
             }
+            else worker.RunWorkerAsync();
 
             //if (tf) shiptomerdate.Value = DateTime.Now;
         }
@@ -349,17 +362,21 @@ namespace SampleQueue
                     //show = false;
                     if (show)
                     {
-                        bturgent.Text = "Approve Urgent";
 
-                        dataGridView2.ReadOnly = true;
-                        foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = false; }
+                        if (!copy)
+                        {
+                            dataGridView2.ReadOnly = true;
+                            foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = false; }
+
+                            bturgent.Text = "Approve Urgent";
+                        }
+                        else bturgent.Text = "Urgent";
 
                         #region Fill Data
                         string docno = "";
                         if (copy) docno = ads + DateTime.Now.ToString("yyMMddHHmmss"); else { docno = DataRow["DocNo"].ToString(); SetDate(DataRow["TechpackPlan"].ToString(), shiptomerdate); }
                         txtdocno.Text = docno;
-                        SetDate(DataRow["IssDate"].ToString(), orderdate);
-                        SetDate(DataRow["ShipDate"].ToString(), firstbulkdate);
+
                         smorderno.Text = DataRow["SmOrderNo"].ToString();
                         style.Text = DataRow["Style"].ToString();
                         custstyle.Text = DataRow["CustStyle"].ToString();
@@ -385,16 +402,8 @@ namespace SampleQueue
 
                         txtcftsampleqty.Text = DataRow["Qty"].ToString(); txtqcsampleqty.Text = DataRow["Qty"].ToString();
 
-                        SetDate(DataRow["BuyReady"].ToString(), buyreadydate);
-                        SetDate(DataRow["RSD"].ToString(), rsddate);
-                        SetDate(DataRow["CSD"].ToString(), csddate);
+
                         season.Text = DataRow["Season"].ToString();
-                        txtsewer.Text = DataRow["OfSewers"].ToString();
-                        txtsewername.Text = DataRow["SewersName"].ToString();
-                        txtqc.Text = DataRow["QCInspection"].ToString();
-                        //txtleadtime.Text = DataRow["Description"].ToString();
-                        //txtavailable.Text = DataRow["Description"].ToString();
-                        SetDate(DataRow["ActShipDate"].ToString(), shipmentdate);
 
                         if (DataRow["SMV"].ToString() != "")
                         {
@@ -410,6 +419,15 @@ namespace SampleQueue
 
                         if (!copy)
                         {
+                            SetDate(DataRow["IssDate"].ToString(), orderdate);
+                            SetDate(DataRow["ShipDate"].ToString(), firstbulkdate);
+                            SetDate(DataRow["BuyReady"].ToString(), buyreadydate);
+                            SetDate(DataRow["RSD"].ToString(), rsddate);
+                            SetDate(DataRow["CSD"].ToString(), csddate);
+                            txtsewer.Text = DataRow["OfSewers"].ToString();
+                            txtsewername.Text = DataRow["SewersName"].ToString();
+                            txtqc.Text = DataRow["QCInspection"].ToString();
+                            SetDate(DataRow["ActShipDate"].ToString(), shipmentdate);
                             //SetDate(DataRow["TechpackPlan"].ToString(), shiptomerdate);
                             //SetDate(DataRow["TechpackActual"].ToString(), techpackactual);
                             SetDate(DataRow["TrimcardPlan"].ToString(), manualplan);
@@ -496,9 +514,11 @@ namespace SampleQueue
                                 SetTime(DataRow["QCActual"].ToString(), qcreleasetime);
                                 SetTime(DataRow["CFTPlan"].ToString(), cftreceivetime);
                                 SetTime(DataRow["CFTActual"].ToString(), cftreleasetime);
+                                SetDate(DataRow["PatternReturn"].ToString(), returnpatterndate);
 
                                 printingcount.Value = decimal.Parse(DataRow["PrintingCount"].ToString());
                                 embroiderycount.Value = decimal.Parse(DataRow["EMBCount"].ToString());
+                                embroiderystitches.Value = decimal.Parse(DataRow["EMBStitches"].ToString());
                                 heatcount.Value = decimal.Parse(DataRow["HeatCount"].ToString());
                                 debossingcount.Value = decimal.Parse(DataRow["DebossingCount"].ToString());
                                 embossingcount.Value = decimal.Parse(DataRow["EmbossingCount"].ToString());
@@ -507,7 +527,7 @@ namespace SampleQueue
                                 padprintcount.Value = decimal.Parse(DataRow["PadprintCount"].ToString());
                                 subprintcount.Value = decimal.Parse(DataRow["SubprintCount"].ToString());
                             }
-                            catch { }
+                            catch(Exception ex) { MessageBox.Show("Fail to show Decoration Count number !!! " + ex.ToString()); }
 
                             LoadInspection();
 
@@ -518,131 +538,131 @@ namespace SampleQueue
                                 else ur = false;
                             }
                             else ur = false;
-                        }
 
-                        LoadSize(DataRow["SmOrderNo"].ToString(), docno);
-
-                        #endregion
-
-                        if (Temp.Dept.Contains("MER"))
-                        {
-                            //foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = true; }
-                            //Lock(false);
-
-                            if (DataRow["Status"].ToString() == "New" || DataRow["Status"].ToString() == "Incomplete")
+                            if (Temp.Dept.Contains("MER"))
                             {
-                                dataGridView2.ReadOnly = false;
+                                //foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = true; }
+                                //Lock(false);
 
-                                foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = true; }
-
-                                Lock(false);
-                            }
-                            else
-                            {
-                                string ch = "select * from sromstrunlock where DocNo = '" + txtdocno.Text + "' and UnlockStatus = 0";
-                                DataTable dt = kn.Doc(ch).Tables[0];
-
-                                if (dt.Rows.Count > 0)
+                                if (DataRow["Status"].ToString() == "New" || DataRow["Status"].ToString() == "Incomplete")
                                 {
-                                    unlock = true;
-
                                     dataGridView2.ReadOnly = false;
 
                                     foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = true; }
+
+                                    Lock(false);
+                                }
+                                else
+                                {
+                                    string ch = "select * from sromstrunlock where DocNo = '" + txtdocno.Text + "' and UnlockStatus = 0";
+                                    DataTable dt = kn.Doc(ch).Tables[0];
+
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        unlock = true;
+
+                                        dataGridView2.ReadOnly = false;
+
+                                        foreach (Control ctr in panel1.Controls) { if (!(ctr is Label)) ctr.Enabled = true; }
+                                    }
+
+                                    Lock(true);
                                 }
 
-                                Lock(true);
+                                csddate.Enabled = true;
+                                bturgent.Enabled = true;
                             }
 
-                            csddate.Enabled = true;
-                            bturgent.Enabled = true;
+                            if (Temp.Dept.Contains("SMP"))
+                            {
+                                txtsewer.Enabled = true; txtsewername.Enabled = true; txtqc.Enabled = true; csddate.Enabled = true;
+
+                                qcplan.Enabled = false;
+                                qcactual.Enabled = false;
+                                cftplan.Enabled = false;
+                                cftactual.Enabled = false;
+                            }
+
+                            if (Temp.Dept.Contains("CFT"))
+                            {
+                                Lock(true);
+
+                                qcplan.Enabled = true;
+                                qcactual.Enabled = true;
+                                cftplan.Enabled = true;
+                                cftactual.Enabled = true;
+                                qcreceivetime.Enabled = true;
+                                qcreleasetime.Enabled = true;
+                                cftreceivetime.Enabled = true;
+                                cftreleasetime.Enabled = true;
+                            }
+
+                            if (Temp.Dept.Contains("QC"))
+                            {
+                                Lock(true);
+
+                                qcplan.Enabled = true;
+                                qcactual.Enabled = true;
+                                cftplan.Enabled = true;
+                                cftactual.Enabled = true;
+                            }
+
+                            if (Temp.Dept.Contains("EMB"))
+                            {
+                                Lock(false);
+                            }
+
+                            btfindsampleno.Enabled = false;
+
+                            btmeraddcomment.Enabled = true; shiptomerdate.Enabled = true;
+
+                            bturgent.Enabled = ur;
+
+                            LoadComments(txtdocno.Text);
+
+                            lbstatus.Text = DataRow["Status"].ToString();
+
+                            switch (lbstatus.Text)
+                            {
+                                case "New":
+                                    lbstatus.BackColor = AppConfig.New;
+                                    break;
+                                case "Incomplete":
+                                    lbstatus.BackColor = AppConfig.Incomplete;
+                                    break;
+                                case "In Queue":
+                                    lbstatus.BackColor = AppConfig.InQueue;
+                                    break;
+                                case "In Production":
+                                    lbstatus.BackColor = AppConfig.InDecoration;
+                                    break;
+                                case "In Decoration":
+                                    lbstatus.BackColor = AppConfig.InDecoration;
+                                    break;
+                                case "In Sewing":
+                                    lbstatus.BackColor = AppConfig.InSewing;
+                                    break;
+                                case "CFT Passed":
+                                    lbstatus.BackColor = AppConfig.CFTPassed;
+                                    break;
+                                case "QC Passed":
+                                    lbstatus.BackColor = AppConfig.CFTPassed;
+                                    break;
+                                case "Finish":
+                                    lbstatus.BackColor = AppConfig.FinishOnTime;
+                                    break;
+                                case "Finish On Time":
+                                    lbstatus.BackColor = AppConfig.FinishOnTime;
+                                    break;
+                                case "Finish in Delay":
+                                    lbstatus.BackColor = AppConfig.FinishDelay;
+                                    break;
+                            }
                         }
 
-                        if (Temp.Dept.Contains("SMP"))
-                        {
-                            txtsewer.Enabled = true; txtsewername.Enabled = true; txtqc.Enabled = true; csddate.Enabled = true;
+                        LoadSize(DataRow["Style"].ToString(), docno);
 
-                            qcplan.Enabled = false;
-                            qcactual.Enabled = false;
-                            cftplan.Enabled = false;
-                            cftactual.Enabled = false;
-                        }
-
-                        if (Temp.Dept.Contains("CFT"))
-                        {
-                            Lock(true);
-
-                            qcplan.Enabled = true;
-                            qcactual.Enabled = true;
-                            cftplan.Enabled = true;
-                            cftactual.Enabled = true;
-                            qcreceivetime.Enabled = true;
-                            qcreleasetime.Enabled = true;
-                            cftreceivetime.Enabled = true;
-                            cftreleasetime.Enabled = true;
-                        }
-
-                        if (Temp.Dept.Contains("QC"))
-                        {
-                            Lock(true);
-
-                            qcplan.Enabled = true;
-                            qcactual.Enabled = true;
-                            cftplan.Enabled = true;
-                            cftactual.Enabled = true;
-                        }
-
-                        if (Temp.Dept.Contains("EMB"))
-                        {
-                            Lock(false);
-                        }
-
-                        btfindsampleno.Enabled = false;
-
-                        btmeraddcomment.Enabled = true; shiptomerdate.Enabled = true;
-
-                        bturgent.Enabled = ur;
-
-                        LoadComments(txtdocno.Text);
-
-                        lbstatus.Text = DataRow["Status"].ToString();
-
-                        switch (lbstatus.Text)
-                        {
-                            case "New":
-                                lbstatus.BackColor = AppConfig.New;
-                                break;
-                            case "Incomplete":
-                                lbstatus.BackColor = AppConfig.Incomplete;
-                                break;
-                            case "In Queue":
-                                lbstatus.BackColor = AppConfig.InQueue;
-                                break;
-                            case "In Production":
-                                lbstatus.BackColor = AppConfig.InDecoration;
-                                break;
-                            case "In Decoration":
-                                lbstatus.BackColor = AppConfig.InDecoration;
-                                break;
-                            case "In Sewing":
-                                lbstatus.BackColor = AppConfig.InSewing;
-                                break;
-                            case "CFT Passed":
-                                lbstatus.BackColor = AppConfig.CFTPassed;
-                                break;
-                            case "QC Passed":
-                                lbstatus.BackColor = AppConfig.CFTPassed;
-                                break;
-                            case "Finish":
-                                lbstatus.BackColor = AppConfig.FinishOnTime;
-                                break;
-                            case "Finish On Time":
-                                lbstatus.BackColor = AppConfig.FinishOnTime;
-                                break;
-                            case "Finish in Delay":
-                                lbstatus.BackColor = AppConfig.FinishDelay;
-                                break;
-                        }
+                        #endregion
                     }
                     else
                     {
@@ -664,6 +684,10 @@ namespace SampleQueue
                     btsampleidlist.Enabled = true;
 
                     if (tf) shiptomerdate.Value = DateTime.Now;
+
+                    if (copy) LoadSize(DataRow["Style"].ToString(), "", true);
+
+                    if (Temp.User == "CHO") Unlock(this);
 
                     void Lock(bool deco)
                     {
@@ -696,7 +720,16 @@ namespace SampleQueue
             }
             catch { }
         }
+        private void Unlock(Control ctr)
+        {
+            ctr.Enabled = true;
 
+            foreach (Control c in ctr.Controls)
+            {
+                if (c.Controls.Count > 0) Unlock(c);
+                else c.Enabled = true;
+            }
+        }
         private void LoadInspection()
         {
             try
@@ -854,7 +887,7 @@ namespace SampleQueue
 
                 versioncount = data["versioncount"].ToString();
 
-                LoadSize(data["smorderno"].ToString(), "");
+                LoadSize(data["style"].ToString(), "");
             }
             catch { }
         }
@@ -896,7 +929,7 @@ namespace SampleQueue
                 {
                     string gmt = gmttype.Text.Split('-')[0].Trim().ToUpper();
 
-                    DataTable dtgmt = kn.Doc("select SMV from sromstrsmv where Code = '" + gmt + "'").Tables[0];
+                    DataTable dtgmt = kn.Doc("select SMV from sromstrsmv where Code = '" + gmt + "' and Dept = '" + (dept == "ADS" ? "ADS" : "PUMA") + "'").Tables[0];
 
                     if (dtgmt.Rows.Count > 0)
                     {
@@ -909,56 +942,73 @@ namespace SampleQueue
                 }
             }
         }
-        public void LoadSize(string orderno, string docno)
+        public void LoadSize(string style, string docno, bool loadERP = false)
         {
             try
             {
                 tb.Clear();
-                if (orderno != "")
+                if (style != "")
                 {
-                    string ch = "exec SampleQueueLoading 24, '" + orderno + "', '" + docno + "', ''";
+                    List<string> color = new List<string>();
+                    List<string> size = new List<string>();
 
-                    DataSet ds1 = kn.Doc(ch);
-                    DataTable size = ds1.Tables[0];
-                    DataTable color = ds1.Tables[1];
-
-                    stage.Clear();
-                    foreach (DataRow r in ds1.Tables[2].Rows)
+                    if (loadERP)
                     {
-                        //dtgcftstatus.Rows.Add(r[0].ToString(), r[1].ToString(), r[2].ToString());
-                        stage.Add(r[0].ToString());
+                        try
+                        {
+                            string ch = "SELECT * FROM [AXDB].[dbo].[AllFGItem] WITH(NOLOCK) WHERE style = '" + style + "'";
+                            DataTable data = erp.Doc(ch, 3000).Tables[0];
+
+                            color = data.Select().Select(s => s["color"].ToString()).Distinct().ToList();
+                            size = data.Select().Select(s => s["sizx"].ToString()).Distinct().ToList();
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+                        if (ColorSize != null)
+                        {
+                            color = ColorSize.Select().Select(s => s["color"].ToString()).Distinct().ToList();
+                            size = ColorSize.Select().Select(s => s["sizx"].ToString()).Distinct().ToList();
+                        }
                     }
 
                     DataTable dt = new DataTable();
                     DataTable sizeqty = new DataTable();
 
-                    if (docno != "") sizeqty = kn.Doc("select * from sroasm where DocNo = '" + docno + "'").Tables[0];
+                    if (docno != "")
+                    {
+                        sizeqty = kn.Doc("select * from sroasm WITH(NOLOCK) where DocNo = '" + docno + "'").Tables[0];
+
+                        foreach (DataRow r in sizeqty.Rows)
+                        {
+                            if (!color.Contains(r["Color"].ToString())) color.Add(r["Color"].ToString());
+                            if (!size.Contains(r["Sizx"].ToString())) size.Add(r["Sizx"].ToString());
+                        }
+                    }
 
                     dt.Columns.Add("Color/Size", typeof(string));
 
-                    foreach (DataRow r in size.Rows) dt.Columns.Add(r["sizx"].ToString(), typeof(string));
+                    color.Sort();
+                    size.Sort();
 
-                    foreach (DataRow r in color.Rows)
+                    foreach (string str in size) dt.Columns.Add(str, typeof(string));
+
+                    foreach (string str in color)
                     {
-                        DataRow rr = dt.NewRow();
-                        for (int i = 0; i < dt.Columns.Count; i++)
+                        DataRow dr = dt.NewRow();
+                        dr[0] = str;
+
+                        foreach (DataRow r in sizeqty.Rows)
                         {
-                            if (i == 0) rr[0] = r["color"].ToString();
-                            else
+                            if (r["Color"].ToString() == str)
                             {
-                                if (sizeqty.Rows.Count > 0)
-                                {
-                                    try
-                                    {
-                                        rr[i] = sizeqty.Select("Color = '" + r["color"].ToString() + "' and Sizx = '" + dt.Columns[i].ColumnName + "'").Select(d => d["Qty"].ToString()).ToArray()[0];
-                                    }
-                                    catch { rr[i] = ""; }
-                                }
-                                else rr[i] = "";
+                                dr[r["Sizx"].ToString()] = r["Qty"];
                             }
                         }
 
-                        dt.Rows.Add(rr); //MessageBox.Show(dt.Rows.Count.ToString());
+                        dt.Rows.Add(dr);
+                        dt.AcceptChanges();
                     }
 
                     dataGridView2.Invoke((Action)(() =>
@@ -1148,7 +1198,7 @@ namespace SampleQueue
 
         private void btsave_Click(object sender, EventArgs e)
         {
-            if (smorderno.Text != "")
+            if (style.Text != "")
             {
                 if (tf) SaveCmd();
                 else
@@ -1164,10 +1214,10 @@ namespace SampleQueue
         }
         private void SaveCmd()
         {
-            if (tf) Run();
+            if (tf || DataRow is null) Run();
             else
             {
-                DataTable open = kn.Doc("select * from sromstr where DocNo = '" + DataRow[0].ToString() + "'").Tables[0];
+                DataTable open = kn.Doc("select * from sromstr WITH(NOLOCK) where DocNo = '" + DataRow[0].ToString() + "'").Tables[0];
 
                 if (open.Rows.Count > 0)
                 {
@@ -1225,7 +1275,7 @@ namespace SampleQueue
                         MessageBox.Show("You have to key any qty !!!");
                         dataGridView2.Focus();
                     }
-                    else if (rs && Temp.Dept == "MER" && urgent == 0 && dept == "PUMA")
+                    else if (rs && Temp.Dept == "MER" && urgent == 0 && (dept == "PUMA" || dept == "NB"))
                     {
                         MessageBox.Show("Limit SMV <RSD/CSD : " + dk.Value.ToString("dd/MM/yyyy") + " - Booked SMV/Total SMV : " + bookedqty + "/" + capacity + "> : " + (qty * smv) + ", you have to change the RSD to another date !!!", "OVER CAPACITY", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         rsddate.Format = DateTimePickerFormat.Custom;
@@ -1566,8 +1616,7 @@ namespace SampleQueue
                     if (show) kn.Ghi("delete from sromstrdel where DocNo = '" + txtdocno.Text + "' \n" +
                                     "insert into sromstrdel select * from sromstr where DocNo = '" + txtdocno.Text + "' \n" +
                                     "delete from sromstr where DocNo = '" + txtdocno.Text + "' \n" +
-                                    "delete from sroasm where DocNo = '" + txtdocno.Text + "' \n" +
-                                    "delete from sromstrsampleid where DocNo = '" + txtdocno.Text + "'");
+                                    "delete from sroasm where DocNo = '" + txtdocno.Text + "'");
                     if (Existed())
                     {
                         txtdocno.Text = ads + DateTime.Now.ToString("yyMMddHHmmss");
@@ -1615,6 +1664,7 @@ namespace SampleQueue
                                    (cftactual.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + cftactual.Value.ToString("yyyyMMdd") +
                                    (cftreleasetime.Format == DateTimePickerFormat.Custom ? "'" : " " + cftreleasetime.Value.ToString("HH:mm:ss") + "'")) + "," +
                                    (finishactual.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + finishactual.Value.ToString("yyyyMMdd") + "'") + "," +
+                                   (returnpatterndate.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + returnpatterndate.Value.ToString("yyyyMMdd") + "'") + "," +
                                    (markerreleaseplan.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + markerreleaseplan.Value.ToString("yyyyMMdd") + "'") + "," +
                                     (markerreleaseactual.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + markerreleaseactual.Value.ToString("yyyyMMdd") + "'") + "," +
                                     (printingplan.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + printingplan.Value.ToString("yyyyMMdd") + "'") + "," +
@@ -1635,7 +1685,7 @@ namespace SampleQueue
                                     (padprintreleaseplan.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + padprintreleaseplan.Value.ToString("yyyyMMdd") + "'") + "," +
                                     (subprintplan.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + subprintplan.Value.ToString("yyyyMMdd") + "'") + "," +
                                     (subprintreleaseplan.Format == DateTimePickerFormat.Custom ? "NULL" : "'" + subprintreleaseplan.Value.ToString("yyyyMMdd") + "'") + "," +
-                                    printingcount.Value + "," + embroiderycount.Value + "," + heatcount.Value + "," + debossingcount.Value + "," + embossingcount.Value + "," +
+                                    printingcount.Value + "," + embroiderycount.Value + "," + embroiderystitches.Value + "," + heatcount.Value + "," + debossingcount.Value + "," + embossingcount.Value + "," +
                                     bondingcount.Value + "," + lazercount.Value + "," + padprintcount.Value + "," + subprintcount.Value + "," + capacityid + "," + smv.ToString().Replace(",", ".") + ") ";
                         kn.Ghi(ch);
                         if (kn.ErrorMessage != "") MessageBox.Show(ch + kn.ErrorMessage);
@@ -1668,7 +1718,7 @@ namespace SampleQueue
                                 }
                             }
 
-                            kn.Ghi("delete from sromstrsampleid where DocNo = '" + txtdocno.Text + "' and Status is null");
+                            //kn.Ghi("delete from sromstrsampleid where DocNo = '" + txtdocno.Text + "' and Status is null");
                         }
 
                         if (exit) { Close(); fr1.worker.RunWorkerAsync(); }
@@ -1787,7 +1837,6 @@ namespace SampleQueue
             }
             catch { }
         }
-        List<string> stage = new List<string>();
         private void btcftadd_Click(object sender, EventArgs e)
         {
             try
@@ -1921,11 +1970,14 @@ namespace SampleQueue
 
         private void addColorSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (smorderno.Text != "" && txtdocno.Text != "")
-            {
-                frmaddcolorsize frm = new frmaddcolorsize(this, smorderno.Text, txtdocno.Text);
-                frm.ShowDialog();
-            }
+            //if (smorderno.Text != "" && txtdocno.Text != "")
+            //{
+            //    frmaddcolorsize frm = new frmaddcolorsize(this, smorderno.Text, txtdocno.Text);
+            //    frm.ShowDialog();
+            //}
+            runbg = 1;
+            progressBar1.Visible = true;
+            worker.RunWorkerAsync();
         }
 
         private void smptype_SelectedIndexChanged(object sender, EventArgs e)
@@ -2008,6 +2060,11 @@ namespace SampleQueue
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
+        private void decorationtab_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btcmtinddt_Click(object sender, EventArgs e)
         {
             if (style.Text != "")
@@ -2038,7 +2095,7 @@ namespace SampleQueue
         }
         private void frmitem_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (isopen) kn.Ghi("update sromstr set IsOpen = '' where DocNo = '" + DataRow[0].ToString() + "'");
+            if (isopen && DataRow != null) kn.Ghi("update sromstr set IsOpen = '' where DocNo = '" + DataRow[0].ToString() + "'");
         }
 
         private void dtgcftstatus_CellClick(object sender, DataGridViewCellEventArgs e)

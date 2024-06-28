@@ -169,6 +169,9 @@ namespace SampleQueue
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.finalcheckplan = new System.Windows.Forms.DateTimePicker();
             this.label35 = new System.Windows.Forms.Label();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.returnpatterndate = new System.Windows.Forms.DateTimePicker();
+            this.label82 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.copypatternplan = new System.Windows.Forms.DateTimePicker();
             this.label37 = new System.Windows.Forms.Label();
@@ -216,6 +219,7 @@ namespace SampleQueue
             this.embossingcount = new System.Windows.Forms.NumericUpDown();
             this.debossingcount = new System.Windows.Forms.NumericUpDown();
             this.heatcount = new System.Windows.Forms.NumericUpDown();
+            this.embroiderystitches = new System.Windows.Forms.NumericUpDown();
             this.embroiderycount = new System.Windows.Forms.NumericUpDown();
             this.printingcount = new System.Windows.Forms.NumericUpDown();
             this.debossing = new System.Windows.Forms.CheckBox();
@@ -251,6 +255,7 @@ namespace SampleQueue
             this.bondingactual = new System.Windows.Forms.DateTimePicker();
             this.subprintactual = new System.Windows.Forms.DateTimePicker();
             this.label55 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
@@ -401,6 +406,7 @@ namespace SampleQueue
             ((System.ComponentModel.ISupportInitialize)(this.dtgpatterncomment)).BeginInit();
             this.groupBox9.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -420,6 +426,7 @@ namespace SampleQueue
             ((System.ComponentModel.ISupportInitialize)(this.embossingcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.debossingcount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heatcount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.embroiderystitches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.embroiderycount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printingcount)).BeginInit();
             this.groupBox15.SuspendLayout();
@@ -524,8 +531,8 @@ namespace SampleQueue
             this.addColorSizeToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
             this.addColorSizeToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_more;
             this.addColorSizeToolStripMenuItem.Name = "addColorSizeToolStripMenuItem";
-            this.addColorSizeToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
-            this.addColorSizeToolStripMenuItem.Text = "Add Color - Size";
+            this.addColorSizeToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.addColorSizeToolStripMenuItem.Text = "Load More Color/Size From ERP";
             this.addColorSizeToolStripMenuItem.Click += new System.EventHandler(this.addColorSizeToolStripMenuItem_Click);
             // 
             // panel1
@@ -1775,6 +1782,7 @@ namespace SampleQueue
             this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.groupBox21);
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.groupBox7);
@@ -1941,6 +1949,40 @@ namespace SampleQueue
             this.label35.Size = new System.Drawing.Size(60, 13);
             this.label35.TabIndex = 0;
             this.label35.Text = "Plan Date :";
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.returnpatterndate);
+            this.groupBox21.Controls.Add(this.label82);
+            this.groupBox21.Location = new System.Drawing.Point(244, 137);
+            this.groupBox21.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox21.Size = new System.Drawing.Size(221, 43);
+            this.groupBox21.TabIndex = 2;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Return Pattern :";
+            // 
+            // returnpatterndate
+            // 
+            this.returnpatterndate.CustomFormat = " ";
+            this.returnpatterndate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.returnpatterndate.Location = new System.Drawing.Point(72, 19);
+            this.returnpatterndate.Margin = new System.Windows.Forms.Padding(2);
+            this.returnpatterndate.Name = "returnpatterndate";
+            this.returnpatterndate.Size = new System.Drawing.Size(139, 19);
+            this.returnpatterndate.TabIndex = 2;
+            this.returnpatterndate.ValueChanged += new System.EventHandler(this.orderdate_ValueChanged);
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(3, 23);
+            this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(71, 13);
+            this.label82.TabIndex = 0;
+            this.label82.Text = "Return Date :";
             // 
             // groupBox8
             // 
@@ -2415,6 +2457,7 @@ namespace SampleQueue
             this.decorationtab.Controls.Add(this.embossingcount);
             this.decorationtab.Controls.Add(this.debossingcount);
             this.decorationtab.Controls.Add(this.heatcount);
+            this.decorationtab.Controls.Add(this.embroiderystitches);
             this.decorationtab.Controls.Add(this.embroiderycount);
             this.decorationtab.Controls.Add(this.printingcount);
             this.decorationtab.Controls.Add(this.debossing);
@@ -2446,6 +2489,7 @@ namespace SampleQueue
             this.decorationtab.Controls.Add(this.bondingactual);
             this.decorationtab.Controls.Add(this.subprintactual);
             this.decorationtab.Controls.Add(this.label55);
+            this.decorationtab.Controls.Add(this.label81);
             this.decorationtab.Controls.Add(this.label61);
             this.decorationtab.Controls.Add(this.label60);
             this.decorationtab.Controls.Add(this.label59);
@@ -2475,6 +2519,7 @@ namespace SampleQueue
             this.decorationtab.TabIndex = 3;
             this.decorationtab.Text = "Decoration     ";
             this.decorationtab.UseVisualStyleBackColor = true;
+            this.decorationtab.Click += new System.EventHandler(this.decorationtab_Click);
             // 
             // subprintcount
             // 
@@ -2538,6 +2583,20 @@ namespace SampleQueue
             this.heatcount.Name = "heatcount";
             this.heatcount.Size = new System.Drawing.Size(90, 19);
             this.heatcount.TabIndex = 15;
+            // 
+            // embroiderystitches
+            // 
+            this.embroiderystitches.Enabled = false;
+            this.embroiderystitches.Location = new System.Drawing.Point(182, 143);
+            this.embroiderystitches.Margin = new System.Windows.Forms.Padding(2);
+            this.embroiderystitches.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.embroiderystitches.Name = "embroiderystitches";
+            this.embroiderystitches.Size = new System.Drawing.Size(90, 19);
+            this.embroiderystitches.TabIndex = 15;
             // 
             // embroiderycount
             // 
@@ -2954,6 +3013,16 @@ namespace SampleQueue
             this.label55.Size = new System.Drawing.Size(84, 13);
             this.label55.TabIndex = 0;
             this.label55.Text = "Position Number";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(125, 146);
+            this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(54, 13);
+            this.label81.TabIndex = 0;
+            this.label81.Text = "Stitches : ";
             // 
             // label61
             // 
@@ -4518,7 +4587,7 @@ namespace SampleQueue
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(445, 0);
+            this.progressBar1.Location = new System.Drawing.Point(577, 0);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.MarqueeAnimationSpeed = 1;
             this.progressBar1.Name = "progressBar1";
@@ -4586,6 +4655,8 @@ namespace SampleQueue
             this.groupBox9.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -4611,6 +4682,7 @@ namespace SampleQueue
             ((System.ComponentModel.ISupportInitialize)(this.embossingcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.debossingcount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.heatcount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.embroiderystitches)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.embroiderycount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.printingcount)).EndInit();
             this.groupBox15.ResumeLayout(false);
@@ -4997,5 +5069,10 @@ namespace SampleQueue
         private System.Windows.Forms.DataGridViewTextBoxColumn Reason;
         private System.Windows.Forms.DataGridViewTextBoxColumn SysCreatedDate;
         private System.Windows.Forms.Button btcmtinddt;
+        private System.Windows.Forms.NumericUpDown embroiderystitches;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.DateTimePicker returnpatterndate;
+        private System.Windows.Forms.Label label82;
     }
 }

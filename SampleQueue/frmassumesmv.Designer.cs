@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.nmsmv = new System.Windows.Forms.NumericUpDown();
+            this.txtsmv = new System.Windows.Forms.TextBox();
             this.btadjust = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,9 +48,9 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btimport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmsmv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -68,7 +68,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.nmsmv);
+            this.groupBox2.Controls.Add(this.btimport);
+            this.groupBox2.Controls.Add(this.txtsmv);
             this.groupBox2.Controls.Add(this.btadjust);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -81,32 +82,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Adjust Assumption SMV :";
             // 
-            // nmsmv
+            // txtsmv
             // 
-            this.nmsmv.DecimalPlaces = 2;
-            this.nmsmv.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nmsmv.Location = new System.Drawing.Point(280, 43);
-            this.nmsmv.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nmsmv.Name = "nmsmv";
-            this.nmsmv.Size = new System.Drawing.Size(120, 20);
-            this.nmsmv.TabIndex = 3;
-            this.nmsmv.ThousandsSeparator = true;
-            this.nmsmv.ValueChanged += new System.EventHandler(this.nmsmv_ValueChanged);
+            this.txtsmv.Location = new System.Drawing.Point(260, 42);
+            this.txtsmv.Name = "txtsmv";
+            this.txtsmv.Size = new System.Drawing.Size(100, 20);
+            this.txtsmv.TabIndex = 3;
+            this.txtsmv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsmv_KeyPress);
             // 
             // btadjust
             // 
             this.btadjust.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btadjust.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btadjust.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btadjust.Location = new System.Drawing.Point(424, 40);
+            this.btadjust.Location = new System.Drawing.Point(375, 40);
             this.btadjust.Name = "btadjust";
             this.btadjust.Size = new System.Drawing.Size(75, 23);
             this.btadjust.TabIndex = 2;
@@ -119,7 +108,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Blue;
-            this.label3.Location = new System.Drawing.Point(277, 27);
+            this.label3.Location = new System.Drawing.Point(257, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 1;
@@ -143,6 +132,7 @@
             this.cmbstyleadjustsmv.Name = "cmbstyleadjustsmv";
             this.cmbstyleadjustsmv.Size = new System.Drawing.Size(238, 21);
             this.cmbstyleadjustsmv.TabIndex = 0;
+            this.cmbstyleadjustsmv.SelectedIndexChanged += new System.EventHandler(this.cmbstyleadjustsmv_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -274,6 +264,19 @@
             this.Column4.ReadOnly = true;
             this.Column4.Width = 200;
             // 
+            // btimport
+            // 
+            this.btimport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btimport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btimport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btimport.Location = new System.Drawing.Point(375, 11);
+            this.btimport.Name = "btimport";
+            this.btimport.Size = new System.Drawing.Size(75, 23);
+            this.btimport.TabIndex = 2;
+            this.btimport.Text = "IMPORT";
+            this.btimport.UseVisualStyleBackColor = false;
+            this.btimport.Click += new System.EventHandler(this.btimport_Click);
+            // 
             // frmassumesmv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,7 +297,6 @@
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmsmv)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -317,7 +319,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbstyleadjustsmv;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nmsmv;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripStatusLabel lbrow;
@@ -326,5 +327,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtsmv;
+        private System.Windows.Forms.Button btimport;
     }
 }

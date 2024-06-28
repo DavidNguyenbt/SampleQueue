@@ -14,14 +14,17 @@ namespace SampleQueue
     public partial class frmchangeuserpass : Form
     {
         Connect kn = new Connect(Temp.ch);
-        public frmchangeuserpass()
+        string mk = "";
+        public frmchangeuserpass(string mk = "")
         {
             InitializeComponent();
+            this.mk = mk;
         }
 
         private void frmchangeuserpass_Load(object sender, EventArgs e)
         {
             lbname.Text = "User : " + Temp.User;
+            if (mk != "") txtoldpass.Text = mk;
         }
 
         private void btexit_Click(object sender, EventArgs e)
@@ -46,6 +49,12 @@ namespace SampleQueue
                     {
                         MessageBox.Show("The confirmation password is not the same !!!!");
                         txtconfirm.Focus();
+                    }
+                    else if (!Temp.IsValidPassword(txtconfirm.Text))
+                    {
+
+                        MessageBox.Show("Your new password must comply with IMS policy: Minimum 12 characters, At least one uppercase letter, At least one lowercase letter, At least one number, At least one special character");
+                        txtnewpass.Focus();
                     }
                     else
                     {
