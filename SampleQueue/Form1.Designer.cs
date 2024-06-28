@@ -118,6 +118,8 @@ namespace SampleQueue
             this.transferSampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.adjustPrinterSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.addNewUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capacityTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.urgentTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,6 +132,7 @@ namespace SampleQueue
             this.txtloading = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtname = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtdept = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbmess = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -237,6 +240,8 @@ namespace SampleQueue
             this.cmbss1 = new System.Windows.Forms.ComboBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.dtgsampleidmaster = new Zuby.ADGV.AdvancedDataGridView();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.dtgsampleinventory = new Zuby.ADGV.AdvancedDataGridView();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -245,8 +250,6 @@ namespace SampleQueue
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.dtgsampleinventory = new Zuby.ADGV.AdvancedDataGridView();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -301,9 +304,9 @@ namespace SampleQueue
             this.panel13.SuspendLayout();
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleidmaster)).BeginInit();
-            this.contextMenuStrip2.SuspendLayout();
             this.tabPage13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleinventory)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -539,7 +542,9 @@ namespace SampleQueue
             this.scanSampleIDToolStripMenuItem,
             this.transferSampleToolStripMenuItem,
             this.toolStripMenuItem9,
-            this.adjustPrinterSizeToolStripMenuItem});
+            this.adjustPrinterSizeToolStripMenuItem,
+            this.toolStripMenuItem10,
+            this.addNewUserToolStripMenuItem});
             this.statusColorToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_advanced_lighting_panel_32px;
             this.statusColorToolStripMenuItem.Name = "statusColorToolStripMenuItem";
             this.statusColorToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
@@ -550,7 +555,7 @@ namespace SampleQueue
             // 
             this.toolStripMenuItem1.Image = global::SampleQueue.Properties.Resources.icons8_color_dropper_48px;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem1.Text = "Status Color";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -558,7 +563,7 @@ namespace SampleQueue
             // 
             this.toolStripMenuItem3.Image = global::SampleQueue.Properties.Resources.icons8_password_48px;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(190, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(194, 26);
             this.toolStripMenuItem3.Text = "Change password";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -566,7 +571,7 @@ namespace SampleQueue
             // 
             this.notification.Image = global::SampleQueue.Properties.Resources.icons8_alert;
             this.notification.Name = "notification";
-            this.notification.Size = new System.Drawing.Size(190, 22);
+            this.notification.Size = new System.Drawing.Size(194, 26);
             this.notification.Text = "Alert Notification : On";
             this.notification.Click += new System.EventHandler(this.notification_Click);
             // 
@@ -574,7 +579,7 @@ namespace SampleQueue
             // 
             this.limitQtyByDayToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_time_limit;
             this.limitQtyByDayToolStripMenuItem.Name = "limitQtyByDayToolStripMenuItem";
-            this.limitQtyByDayToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.limitQtyByDayToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.limitQtyByDayToolStripMenuItem.Text = "Limit SMV by Day";
             this.limitQtyByDayToolStripMenuItem.Click += new System.EventHandler(this.limitQtyByDayToolStripMenuItem_Click);
             // 
@@ -582,20 +587,20 @@ namespace SampleQueue
             // 
             this.logCheckingToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_log_1;
             this.logCheckingToolStripMenuItem.Name = "logCheckingToolStripMenuItem";
-            this.logCheckingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.logCheckingToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.logCheckingToolStripMenuItem.Text = "Log Checking";
             this.logCheckingToolStripMenuItem.Click += new System.EventHandler(this.logCheckingToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(191, 6);
             // 
             // sMPCapacityToolStripMenuItem
             // 
             this.sMPCapacityToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_report_card;
             this.sMPCapacityToolStripMenuItem.Name = "sMPCapacityToolStripMenuItem";
-            this.sMPCapacityToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.sMPCapacityToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.sMPCapacityToolStripMenuItem.Text = "SMP Capacity";
             this.sMPCapacityToolStripMenuItem.Click += new System.EventHandler(this.sMPCapacityToolStripMenuItem_Click);
             // 
@@ -603,20 +608,20 @@ namespace SampleQueue
             // 
             this.sMPUploadToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.up;
             this.sMPUploadToolStripMenuItem.Name = "sMPUploadToolStripMenuItem";
-            this.sMPUploadToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.sMPUploadToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.sMPUploadToolStripMenuItem.Text = "SMP Upload";
             this.sMPUploadToolStripMenuItem.Click += new System.EventHandler(this.sMPUploadToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(191, 6);
             // 
             // addNewStyleToolStripMenuItem
             // 
             this.addNewStyleToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_add_pie_chart_report;
             this.addNewStyleToolStripMenuItem.Name = "addNewStyleToolStripMenuItem";
-            this.addNewStyleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.addNewStyleToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.addNewStyleToolStripMenuItem.Text = "Add New Style";
             this.addNewStyleToolStripMenuItem.Click += new System.EventHandler(this.addNewStyleToolStripMenuItem_Click);
             // 
@@ -624,20 +629,20 @@ namespace SampleQueue
             // 
             this.getDataFromERPToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_link;
             this.getDataFromERPToolStripMenuItem.Name = "getDataFromERPToolStripMenuItem";
-            this.getDataFromERPToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.getDataFromERPToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.getDataFromERPToolStripMenuItem.Text = "Get Data From ERP";
             this.getDataFromERPToolStripMenuItem.Click += new System.EventHandler(this.getDataFromERPToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(191, 6);
             // 
             // standardSMVByGmtTypeToolStripMenuItem
             // 
             this.standardSMVByGmtTypeToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_piece_of_lemon_cake;
             this.standardSMVByGmtTypeToolStripMenuItem.Name = "standardSMVByGmtTypeToolStripMenuItem";
-            this.standardSMVByGmtTypeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.standardSMVByGmtTypeToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.standardSMVByGmtTypeToolStripMenuItem.Text = "Standard SMV";
             this.standardSMVByGmtTypeToolStripMenuItem.Click += new System.EventHandler(this.standardSMVByGmtTypeToolStripMenuItem_Click);
             // 
@@ -645,20 +650,20 @@ namespace SampleQueue
             // 
             this.accumToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_protect;
             this.accumToolStripMenuItem.Name = "accumToolStripMenuItem";
-            this.accumToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.accumToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.accumToolStripMenuItem.Text = "Check SMV of Style";
             this.accumToolStripMenuItem.Click += new System.EventHandler(this.accumToolStripMenuItem_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(191, 6);
             // 
             // scanSampleIDToolStripMenuItem
             // 
             this.scanSampleIDToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_barcode;
             this.scanSampleIDToolStripMenuItem.Name = "scanSampleIDToolStripMenuItem";
-            this.scanSampleIDToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.scanSampleIDToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.scanSampleIDToolStripMenuItem.Text = "Scan Sample ID / RFID";
             this.scanSampleIDToolStripMenuItem.Click += new System.EventHandler(this.scanSampleIDToolStripMenuItem_Click);
             // 
@@ -666,21 +671,35 @@ namespace SampleQueue
             // 
             this.transferSampleToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_transition_both_directions;
             this.transferSampleToolStripMenuItem.Name = "transferSampleToolStripMenuItem";
-            this.transferSampleToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.transferSampleToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.transferSampleToolStripMenuItem.Text = "Transfer Sample";
             this.transferSampleToolStripMenuItem.Click += new System.EventHandler(this.transferSampleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(187, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(191, 6);
             // 
             // adjustPrinterSizeToolStripMenuItem
             // 
+            this.adjustPrinterSizeToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.Document;
             this.adjustPrinterSizeToolStripMenuItem.Name = "adjustPrinterSizeToolStripMenuItem";
-            this.adjustPrinterSizeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.adjustPrinterSizeToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.adjustPrinterSizeToolStripMenuItem.Text = "Adjust Printer Size";
             this.adjustPrinterSizeToolStripMenuItem.Click += new System.EventHandler(this.adjustPrinterSizeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(191, 6);
+            // 
+            // addNewUserToolStripMenuItem
+            // 
+            this.addNewUserToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.Add_button;
+            this.addNewUserToolStripMenuItem.Name = "addNewUserToolStripMenuItem";
+            this.addNewUserToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.addNewUserToolStripMenuItem.Text = "Add New User";
+            this.addNewUserToolStripMenuItem.Click += new System.EventHandler(this.addNewUserToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -740,7 +759,8 @@ namespace SampleQueue
             this.processbar,
             this.txtloading,
             this.txtname,
-            this.txtdept});
+            this.txtdept,
+            this.lbmess});
             this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
@@ -783,6 +803,15 @@ namespace SampleQueue
             this.txtdept.Name = "txtdept";
             this.txtdept.Size = new System.Drawing.Size(75, 18);
             this.txtdept.Text = "Deparment : ";
+            // 
+            // lbmess
+            // 
+            this.lbmess.BackColor = System.Drawing.Color.White;
+            this.lbmess.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lbmess.Name = "lbmess";
+            this.lbmess.Size = new System.Drawing.Size(133, 18);
+            this.lbmess.Text = "You have 1 mesages !!!";
+            this.lbmess.Click += new System.EventHandler(this.lbmess_Click);
             // 
             // panel2
             // 
@@ -994,7 +1023,7 @@ namespace SampleQueue
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(1611, 595);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Unclocked & Incomplete   ";
+            this.tabPage2.Text = "Unclocked";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
@@ -1314,9 +1343,9 @@ namespace SampleQueue
             this.panel6.Controls.Add(this.dtgdetail);
             this.panel6.Controls.Add(this.panel10);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(0, 44);
+            this.panel6.Location = new System.Drawing.Point(0, 60);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1611, 551);
+            this.panel6.Size = new System.Drawing.Size(1611, 535);
             this.panel6.TabIndex = 1;
             // 
             // dtginfor
@@ -1334,7 +1363,7 @@ namespace SampleQueue
             this.dtginfor.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtginfor.RowHeadersWidth = 5;
             this.dtginfor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtginfor.Size = new System.Drawing.Size(752, 534);
+            this.dtginfor.Size = new System.Drawing.Size(752, 518);
             this.dtginfor.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dtginfor.TabIndex = 2;
             this.dtginfor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -1355,7 +1384,7 @@ namespace SampleQueue
             this.dtgdetail.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtgdetail.RowHeadersWidth = 5;
             this.dtgdetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgdetail.Size = new System.Drawing.Size(1017, 534);
+            this.dtgdetail.Size = new System.Drawing.Size(1017, 518);
             this.dtgdetail.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dtgdetail.TabIndex = 1;
             this.dtgdetail.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgdetail_CellDoubleClick);
@@ -1367,7 +1396,7 @@ namespace SampleQueue
             this.panel10.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(488, 534);
+            this.panel10.Size = new System.Drawing.Size(488, 518);
             this.panel10.TabIndex = 0;
             // 
             // dtgtopdefect
@@ -1383,7 +1412,7 @@ namespace SampleQueue
             this.dtgtopdefect.Name = "dtgtopdefect";
             this.dtgtopdefect.ReadOnly = true;
             this.dtgtopdefect.RowHeadersWidth = 5;
-            this.dtgtopdefect.Size = new System.Drawing.Size(488, 179);
+            this.dtgtopdefect.Size = new System.Drawing.Size(488, 163);
             this.dtgtopdefect.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
@@ -1430,6 +1459,7 @@ namespace SampleQueue
             // 
             // panel5
             // 
+            this.panel5.AutoScroll = true;
             this.panel5.Controls.Add(this.btchart);
             this.panel5.Controls.Add(this.cmbcft1);
             this.panel5.Controls.Add(this.cmbstyle);
@@ -1451,7 +1481,7 @@ namespace SampleQueue
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1611, 44);
+            this.panel5.Size = new System.Drawing.Size(1611, 60);
             this.panel5.TabIndex = 0;
             // 
             // btchart
@@ -1462,7 +1492,7 @@ namespace SampleQueue
             this.btchart.ForeColor = System.Drawing.Color.Blue;
             this.btchart.Location = new System.Drawing.Point(1421, 0);
             this.btchart.Name = "btchart";
-            this.btchart.Size = new System.Drawing.Size(100, 44);
+            this.btchart.Size = new System.Drawing.Size(100, 60);
             this.btchart.TabIndex = 21;
             this.btchart.Text = "LOAD CHART";
             this.btchart.UseVisualStyleBackColor = false;
@@ -1618,7 +1648,7 @@ namespace SampleQueue
             this.btdownload.Location = new System.Drawing.Point(1521, 0);
             this.btdownload.Margin = new System.Windows.Forms.Padding(2);
             this.btdownload.Name = "btdownload";
-            this.btdownload.Size = new System.Drawing.Size(90, 44);
+            this.btdownload.Size = new System.Drawing.Size(90, 60);
             this.btdownload.TabIndex = 7;
             this.btdownload.Text = "DOWNLOAD";
             this.btdownload.UseVisualStyleBackColor = true;
@@ -2457,6 +2487,32 @@ namespace SampleQueue
             this.dtgsampleidmaster.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgsampleidmaster_CellDoubleClick);
             this.dtgsampleidmaster.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView7_DataError);
             // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.dtgsampleinventory);
+            this.tabPage13.Location = new System.Drawing.Point(4, 4);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Size = new System.Drawing.Size(1611, 595);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "Sample Inventory";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // dtgsampleinventory
+            // 
+            this.dtgsampleinventory.AllowUserToAddRows = false;
+            this.dtgsampleinventory.AllowUserToDeleteRows = false;
+            this.dtgsampleinventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgsampleinventory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgsampleinventory.FilterAndSortEnabled = true;
+            this.dtgsampleinventory.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dtgsampleinventory.Location = new System.Drawing.Point(0, 0);
+            this.dtgsampleinventory.Name = "dtgsampleinventory";
+            this.dtgsampleinventory.ReadOnly = true;
+            this.dtgsampleinventory.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dtgsampleinventory.Size = new System.Drawing.Size(1611, 595);
+            this.dtgsampleinventory.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dtgsampleinventory.TabIndex = 0;
+            // 
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -2518,7 +2574,7 @@ namespace SampleQueue
             // timer2
             // 
             this.timer2.Enabled = true;
-            this.timer2.Interval = 300000;
+            this.timer2.Interval = 30000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // miniToolStrip
@@ -2533,32 +2589,6 @@ namespace SampleQueue
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(1156, 25);
             this.miniToolStrip.TabIndex = 1;
-            // 
-            // tabPage13
-            // 
-            this.tabPage13.Controls.Add(this.dtgsampleinventory);
-            this.tabPage13.Location = new System.Drawing.Point(4, 4);
-            this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(1611, 595);
-            this.tabPage13.TabIndex = 12;
-            this.tabPage13.Text = "Sample Inventory";
-            this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // dtgsampleinventory
-            // 
-            this.dtgsampleinventory.AllowUserToAddRows = false;
-            this.dtgsampleinventory.AllowUserToDeleteRows = false;
-            this.dtgsampleinventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgsampleinventory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgsampleinventory.FilterAndSortEnabled = true;
-            this.dtgsampleinventory.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dtgsampleinventory.Location = new System.Drawing.Point(0, 0);
-            this.dtgsampleinventory.Name = "dtgsampleinventory";
-            this.dtgsampleinventory.ReadOnly = true;
-            this.dtgsampleinventory.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dtgsampleinventory.Size = new System.Drawing.Size(1611, 595);
-            this.dtgsampleinventory.SortStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dtgsampleinventory.TabIndex = 0;
             // 
             // Form1
             // 
@@ -2585,6 +2615,8 @@ namespace SampleQueue
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -2648,9 +2680,9 @@ namespace SampleQueue
             this.panel13.PerformLayout();
             this.tabPage12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleidmaster)).EndInit();
-            this.contextMenuStrip2.ResumeLayout(false);
             this.tabPage13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgsampleinventory)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2826,6 +2858,9 @@ namespace SampleQueue
         private System.Windows.Forms.DataGridView dtgjson;
         private System.Windows.Forms.TabPage tabPage13;
         private Zuby.ADGV.AdvancedDataGridView dtgsampleinventory;
+        private System.Windows.Forms.ToolStripStatusLabel lbmess;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem addNewUserToolStripMenuItem;
     }
 }
 

@@ -40,7 +40,10 @@ namespace SampleQueue
 
         public void LoadData()
         {
-            if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS"; else ads = "PUMA";
+            if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS";
+            else if (Temp.DeptDesc.ToUpper().Contains("PUMA")) ads = "PUMA";
+            else if (Temp.DeptDesc.ToUpper().Contains("NB")) ads = "NB";
+            else if (Temp.DeptDesc.ToUpper().Contains("PW")) ads = "PW";
 
             if (dt.Rows.Count > 0) dt.Rows.Clear();
             dt = kn.Doc("exec GetLoadData 34,'" + ads + "',''").Tables[0];

@@ -18,7 +18,7 @@ namespace SampleQueue
         //public static string ch = "Data Source=192.168.50.253;Initial Catalog=DtradeProduction;Persist Security Info=True;User ID=sa;Password=Sql4116!";
         //public static string ch2 = "Data Source=192.168.50.253;Initial Catalog=SecurityReport;Persist Security Info=True;User ID=sa;Password=Sql4116!";
         //public static string path = @"\\192.168.50.253\Software From A1A\Shared File\SQData";//THAI
-        public static string User = "", Dept = "", DeptDesc = "MERA", Profile = "", version = "V1.0.2";
+        public static string User = "", Dept = "", DeptDesc = "MERA", Profile = "", version = "V1.1.2";
         public static List<string> BoPhan = new List<string> { "All", "MER - Merchandiser", "SMP - Sample Room", "PTT - Pattern", "MK - Marker", "CUT - Cutting", "EMB - Decoration", "SEW - Sewing", "QC - QC", "CFT - CFT" };
         public static string url = "http://192.168.1.100/", myconfig = "";
         public static Color New = Color.LightBlue;

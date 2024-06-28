@@ -37,6 +37,7 @@ namespace SampleQueue
             this.btfind = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.txtrows = new System.Windows.Forms.ToolStripStatusLabel();
+            this.process = new System.Windows.Forms.ToolStripProgressBar();
             this.dtgdata = new Zuby.ADGV.AdvancedDataGridView();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -90,9 +91,11 @@ namespace SampleQueue
             this.txtstyle.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtstyle.Name = "txtstyle";
             this.txtstyle.Size = new System.Drawing.Size(300, 24);
+            this.txtstyle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtstyle_KeyUp);
             // 
             // btfind
             // 
+            this.btfind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btfind.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btfind.ForeColor = System.Drawing.Color.Blue;
             this.btfind.Image = global::SampleQueue.Properties.Resources.icons8_link;
@@ -105,7 +108,8 @@ namespace SampleQueue
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtrows});
+            this.txtrows,
+            this.process});
             this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
@@ -119,12 +123,17 @@ namespace SampleQueue
             this.txtrows.Size = new System.Drawing.Size(44, 17);
             this.txtrows.Text = "Rows : ";
             // 
+            // process
+            // 
+            this.process.MarqueeAnimationSpeed = 5;
+            this.process.Name = "process";
+            this.process.Size = new System.Drawing.Size(300, 16);
+            this.process.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            // 
             // dtgdata
             // 
             this.dtgdata.AllowUserToAddRows = false;
             this.dtgdata.AllowUserToDeleteRows = false;
-            this.dtgdata.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dtgdata.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dtgdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgdata.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgdata.FilterAndSortEnabled = true;
@@ -138,6 +147,7 @@ namespace SampleQueue
             this.dtgdata.Size = new System.Drawing.Size(928, 490);
             this.dtgdata.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dtgdata.TabIndex = 2;
+            this.dtgdata.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgdata_CellDoubleClick);
             // 
             // frmfindstyle
             // 
@@ -179,5 +189,6 @@ namespace SampleQueue
         private System.Windows.Forms.ToolStripTextBox txtstyle;
         private System.Windows.Forms.ToolStripMenuItem btfind;
         private Zuby.ADGV.AdvancedDataGridView dtgdata;
+        private System.Windows.Forms.ToolStripProgressBar process;
     }
 }

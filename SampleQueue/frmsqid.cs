@@ -367,6 +367,7 @@ namespace SampleQueue
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
             bool r = true;
+
             foreach (DataRow dr in dt.Rows)
             {
                 if (dr["Status"].ToString() != "")

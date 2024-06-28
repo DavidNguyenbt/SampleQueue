@@ -59,9 +59,9 @@
             this.lbprint,
             this.lbaddprinter,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 638);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 640);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1246, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1246, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -69,7 +69,7 @@
             // 
             this.lbrows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lbrows.Name = "lbrows";
-            this.lbrows.Size = new System.Drawing.Size(44, 19);
+            this.lbrows.Size = new System.Drawing.Size(44, 17);
             this.lbrows.Text = "Rows : ";
             // 
             // lbselect
@@ -98,7 +98,7 @@
             this.lbaddprinter.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
             this.lbaddprinter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lbaddprinter.Name = "lbaddprinter";
-            this.lbaddprinter.Size = new System.Drawing.Size(117, 19);
+            this.lbaddprinter.Size = new System.Drawing.Size(117, 17);
             this.lbaddprinter.Text = "ADD INTO PRINTER";
             this.lbaddprinter.Visible = false;
             this.lbaddprinter.Click += new System.EventHandler(this.lbaddprinter_Click);
@@ -109,7 +109,7 @@
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Green;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
             this.toolStripStatusLabel1.Text = "RESET DATA";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
@@ -127,7 +127,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 5;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1246, 638);
+            this.dataGridView1.Size = new System.Drawing.Size(1246, 640);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);

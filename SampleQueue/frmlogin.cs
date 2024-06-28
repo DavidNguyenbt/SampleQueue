@@ -83,7 +83,7 @@ namespace SampleQueue
 
         private void frmlogin_Load(object sender, EventArgs e)
         {
-            //try
+            try
             {
                 string mydocu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sample Queue");
                 if (!Directory.Exists(mydocu)) Directory.CreateDirectory(mydocu);
@@ -130,9 +130,10 @@ namespace SampleQueue
                     rd.Close();
                 }
             }
-            //catch { MessageBox.Show("Cannot load config file !!!"); }
+            catch { MessageBox.Show("Cannot load config file !!!"); }
 
             txtuser.Text = AppConfig.User;
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -151,6 +152,11 @@ namespace SampleQueue
                 writer.Write(vc);
                 writer.Close();
             }
+        }
+
+        private void txtuser_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -120,5 +120,10 @@ namespace SampleQueue
         {
             
         }
+
+        private void cmbstyleadjustsmv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

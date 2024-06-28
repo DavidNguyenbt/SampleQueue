@@ -67,11 +67,12 @@ namespace SampleQueue
             // 
             this.txtuser.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtuser.Location = new System.Drawing.Point(90, 48);
-            this.txtuser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtuser.Margin = new System.Windows.Forms.Padding(2);
             this.txtuser.MaxLength = 100;
             this.txtuser.Name = "txtuser";
             this.txtuser.Size = new System.Drawing.Size(184, 20);
             this.txtuser.TabIndex = 0;
+            this.txtuser.TextChanged += new System.EventHandler(this.txtuser_TextChanged);
             // 
             // label3
             // 
@@ -86,7 +87,7 @@ namespace SampleQueue
             // txtpass
             // 
             this.txtpass.Location = new System.Drawing.Point(90, 83);
-            this.txtpass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtpass.Margin = new System.Windows.Forms.Padding(2);
             this.txtpass.MaxLength = 100;
             this.txtpass.Name = "txtpass";
             this.txtpass.PasswordChar = '*';
@@ -101,7 +102,7 @@ namespace SampleQueue
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button1.Location = new System.Drawing.Point(90, 123);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(79, 26);
             this.button1.TabIndex = 4;
@@ -115,7 +116,7 @@ namespace SampleQueue
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Blue;
             this.button2.Location = new System.Drawing.Point(194, 123);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(79, 26);
             this.button2.TabIndex = 2;
@@ -138,7 +139,7 @@ namespace SampleQueue
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmlogin";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

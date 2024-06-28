@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nmsmv = new System.Windows.Forms.NumericUpDown();
@@ -143,6 +143,7 @@
             this.cmbstyleadjustsmv.Name = "cmbstyleadjustsmv";
             this.cmbstyleadjustsmv.Size = new System.Drawing.Size(238, 21);
             this.cmbstyleadjustsmv.TabIndex = 0;
+            this.cmbstyleadjustsmv.SelectedIndexChanged += new System.EventHandler(this.cmbstyleadjustsmv_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -253,8 +254,8 @@
             // Column2
             // 
             this.Column2.DataPropertyName = "SMV";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column2.HeaderText = "SMV";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;

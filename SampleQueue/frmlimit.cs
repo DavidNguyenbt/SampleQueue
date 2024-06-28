@@ -35,7 +35,10 @@ namespace SampleQueue
         {
             try
             {
-                if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS"; else ads = "PUMA";
+                if (Temp.DeptDesc.ToUpper().Contains("ADIDAS") || Temp.DeptDesc.ToUpper().Contains("MERA")) ads = "ADS"; 
+                else if (Temp.DeptDesc.ToUpper().Contains("PUMA")) ads = "PUMA";
+                else if (Temp.DeptDesc.ToUpper().Contains("NB")) ads = "NB";
+                else if (Temp.DeptDesc.ToUpper().Contains("PW")) ads = "PW";
 
                 DataTable dt = kn.Doc("exec SampleQueueLoading 9,'" + ads + "','" + dateTimePicker1.Value.ToString("yyyyMMdd") + "','" + dateTimePicker2.Value.ToString("yyyyMMdd") + "'").Tables[0];
 

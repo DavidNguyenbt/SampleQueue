@@ -524,8 +524,8 @@ namespace SampleQueue
             this.addColorSizeToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
             this.addColorSizeToolStripMenuItem.Image = global::SampleQueue.Properties.Resources.icons8_more;
             this.addColorSizeToolStripMenuItem.Name = "addColorSizeToolStripMenuItem";
-            this.addColorSizeToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
-            this.addColorSizeToolStripMenuItem.Text = "Add Color - Size";
+            this.addColorSizeToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.addColorSizeToolStripMenuItem.Text = "Load More Color/Size From ERP";
             this.addColorSizeToolStripMenuItem.Click += new System.EventHandler(this.addColorSizeToolStripMenuItem_Click);
             // 
             // panel1
@@ -4518,7 +4518,7 @@ namespace SampleQueue
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(445, 0);
+            this.progressBar1.Location = new System.Drawing.Point(577, 0);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.MarqueeAnimationSpeed = 1;
             this.progressBar1.Name = "progressBar1";
